@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
+
+.nav-logo {
+    float: left;
+}
+
+.logo {
+    width: 200px; 
+    height: 100px; 
+    margin-left: 40px;
+}
+
+.nav-list {
+    list-style-type: none;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    margin-right: 5%;
+    margin-left: 20%;
+}
+  
+.nav-item {
+    display: inline-block;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.nav-item:hover .nav-link{
+    color:  rgb(29, 218, 247);
+}
+  
+.nav-link {
+    color: white;
+    font-size: 120%;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+    display: block;
+    padding: 8px;
+}
+
+.nav-btns {
+    list-style-type: none;
+    text-align: right;
+    margin-right: 2%;
+}
+
+.nav-btn {
+    margin-top: 24px;
+    margin-left: 26px;
+    background-color: rgb(0, 4, 4);
+    font-size: 20px;
+    border-radius: 20px;
+    border-color: white;
+}
+
+.nav-btn:hover {
+    border-color: rgb(29, 218, 247);
+}
+
+.btn-link {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 85%;
+    text-decoration: none;
+    display: block;
+    padding: 6px 14px 6px 14px;
+}
+
+.nav-line {
+    margin-top: 25px;
+    width: 82%;
+    margin-left: 17%;
+    margin-right: 1%;
+}
