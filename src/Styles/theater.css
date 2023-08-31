@@ -4,13 +4,22 @@
 
 .theater-page {
     margin-left: 40px;
-    color: azure;
+    margin-top: 2%;
 }
 
 .theater-topic {
     font-size: 260%;
-    font-family: 'Shadows Into Light', serif;
     font-weight: 200;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    color: azure;
+    font-family: 'Domine', serif;
+}
+
+
+.theater-picture {
+    width:50%;
+    margin-left: 8%;
 }
 
 .theater-review {
@@ -18,36 +27,68 @@
     font-family: 'Roboto Slab', serif;
     margin: 40px 100px 40px 20px;
     font-weight: 400;
+    color: aliceblue;
+}
+
+.theater-details {
+    margin-bottom: 4%;
+    color: azure;
+    font-family: 'Domine', serif;
 }
 
 .theater-details-content {
-    font-size: 120%;
-    font-family: 'Domine', serif;
-    font-weight: 400;
+    font-size: 140%;
+    font-weight: 600;
     margin-top: 2%;
     margin-left: 6%;
 }
 
 .theater-details-content-each {
     margin-top: 16px;
+    font-family: 'Shadows Into Light', serif;
 }
 
 .theater-btn {
-    margin: 20px 20px 20px 80px;
-    color: black;
+    color: rgb(255, 255, 255);
     padding: 8px 16px 8px 16px;
     font-size: 150%;
     font-family: 'Courgette', cursive;
     border-radius: 20px;
-    background-color: rgb(45, 252, 218);
+    background-color: rgb(0, 0, 0);
+    border-radius: 20px;
+    border: 2px solid gold;
 }
 
 .theater-location-btn {
+    margin-top: 8%;
     float: right;
-    margin-right: 100px;
+    margin-right: 4%;
+}
+
+.theater-details-btn {
+    margin-top: 8%;
+    float: left;
+    margin-left: 4%;
+}
+
+.theater-review-btn {
+    margin-top: 2%;
+}
+
+.theater-map-btn {
+    margin-top: 8%;
+    float: right;
+    margin-right: 4%;
 }
 
 .theater-btn:hover {
     border: 2px solid white;
 }
+
+.theater-movie-cards-list {
+    margin-left: 6%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 

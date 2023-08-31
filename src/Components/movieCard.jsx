@@ -2,6 +2,8 @@ import 'font-awesome/css/font-awesome.min.css'
 import "../Styles/movieCard.css"
 
 export function MovieCard(props) {
+    const handleClick = () => {}
+
     return(
         <div className='mc-list'>
             <div key={props.id} className='mc'>
@@ -15,6 +17,9 @@ export function MovieCard(props) {
                     <div className='mc-3'>
                         <div className='mc-location'>Genre: {props.genre}</div>
                         <div className='mc-ratings'>Ratings: {props.ratings}</div>
+                    </div>
+                    <div className='mc-4'>
+                        <button className="mc-btn" onClick={handleClick}>Book</button>
                     </div>
                 </div>
             </div>

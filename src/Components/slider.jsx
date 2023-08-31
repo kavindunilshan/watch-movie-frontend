@@ -24,7 +24,7 @@ function Slider() {
         grabCursor={true}
         centeredSlides={true}
         loop={true}
-        slidesPerView={5}
+        slidesPerView={3}
         spaceBetween={20}
         coverflowEffect={{
           rotate: 12,

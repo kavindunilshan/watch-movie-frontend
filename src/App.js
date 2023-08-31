@@ -4,6 +4,7 @@ import Login from './Components/login';
 import NavBar from './Components/navbar';
 import Slider from './Components/slider';
 import Movie from './Components/movie';
+import Theater from './Components/theater';
 
 class App extends Component {
   state = { items:[
@@ -21,7 +22,7 @@ class App extends Component {
       return (
       <React.Fragment>
         <NavBar/>
-        <Movie/>
+        <Theater/>
       </React.Fragment>
     );
   }

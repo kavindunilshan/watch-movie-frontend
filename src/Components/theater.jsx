@@ -2,20 +2,29 @@ import React, { Component } from 'react'
 import Slider from '../Components/slider';
 import { Link } from 'react-router-dom';
 import "../Styles/theater.css"
+import  Pic from "../assets/Transformers.jpg"
+import IMDB from "../assets/imdb.png"
 import { AddressMap } from './map';
 import { withRouter } from './cs';
+import { MovieCard } from './movieCard';
 
 class Theater extends Component {
-    state = {theater:[], location:[], reviews:[], showDetails:false, showLocation:false};
+    state = {theater:{}, location:[], reviews:[], showDetails:false, showLocation:false};
+
+    componentDidMount() { 
+        const theater = {name:"Regal Cinema", dimension:"2D and 3D", city:"Matara",
+                        ratings:"4.6"}
+        this.setState({theater});
+     }
     
     handleDetails = () => {
         const showDetails = !this.state.showDetails;
-        this.setState({showDetails});
+        this.setState({showDetails, showLocation:false});
     }
 
     handleLocation = () => {
         const showLocation = !this.state.showLocation;
-        this.setState({showLocation});
+        this.setState({showLocation, showDetails:false});
     }
 
     handleMap = () => {
@@ -27,47 +36,59 @@ class Theater extends Component {
         const {theater, casts, reviews, showDetails, showLocation} = this.state;
         return (
             <React.Fragment>
-                <div className='theater-page'>  
-                    <Slider/>
+                <div className='theater-page'>
 
-                    <button className='theater-btn theater-details-btn' onClick={() => this.handleDetails}>Theater Details</button>                 
+                    <div className='theater-links'>
+                        <button className="theater-btn theater-details-btn" onClick={this.handleDetails}>Theater Details</button>
+                        <img className='theater-picture' src={Pic}></img>
+                        <button className="theater-btn theater-location-btn" onClick={this.handleLocation}>Theater Location</button>
+                    </div>
+
                     {   theater && showDetails &&
                         <div className='theater-details'>
                             <h1 className='theater-topic'>Theater Details</h1>
-                            
                             <div className='theater-details-content'>
                                 <div className='theater-details-content-each'>Name: {theater.name}</div>
-                                <div className='theater-details-content-each'>Dimension: {theater.dimension}</div>
-                                <div className='theater-details-content-each'>Screen resolution: {theater.resolutiom}</div>
-                                <div className='theater-details-content-each'>Seating Capacity: {theater.capacirty}</div>
+                                <div className='theater-details-content-each'>Dimention: {theater.dimension}</div>
+                                <div className='theater-details-content-each'>City: {theater.city}</div>
                                 <div className='theater-details-content-each'>WatchMovie ratings: {theater.ratings}</div>
                             </div>
                         </div>
                     }
 
-                    <button className='theater-btn theater-location-btn' onClick={() => this.handleLocation}>Theater Location</button>
                     {   theater && showLocation && 
-                        <div className='theater-cast-details'>
+                        <div className='theater-details'>
                             <h1 className='theater-topic'>Theater Location</h1>
 
-                            <div className='theater-map'>
+                            <div className='theater-maps'>
                                 <AddressMap/>
                             </div>
-
-                            <button className="theater-btn" onClick={() => this.handleClick}>Use Google Map</button>
                         </div>
                     }
 
-                    <div className='theater-cast-details'>
+                    <div className='theater-movies-list'>
+                        <h1 className='theater-topic'>PREMIERING NOW</h1>
+                        <div className='theater-movie-cards-list'>
+                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
+                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
+                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
+                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
+                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
+                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
+                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
+                        </div>
+                    </div>
+
+                    <div className='theater-details'>
                         <h1 className='theater-topic'>Share your thoughts with Us...</h1>
 
                         <h2 className='theater-review'>We will highly appriciate that if you could share
                         your thoughts with us.</h2>
-                        <button className="theater-btn" onClick={this.handleClick}>Add Review</button>
+                        <button className="theater-btn theater-review-btn" onClick={this.handleClick}>Add Review</button>
 
                     </div>
 
-                    <div className='theater-user-reviews'>
+                    <div className='theater-details'>
                         <h1 className='theater-topic'>User Reviews on {theater.name}</h1>
                         {reviews.map(review => {review &&
                                 <div className='each-review-detail'>

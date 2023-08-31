@@ -13,11 +13,11 @@ class Movie extends Component {
             <React.Fragment>
                 <div className='movie-page'>
                     <div className='movie-links'>
-                        <Link to={`${movie.imdb}`}>
-                            <img className='imdb-logo' src={IMDB}></img>
-                        </Link>
-                    <img className='movie-picture' src={Pic}></img>
-                    <button className="movie-theater-btn" onClick={this.handleClick}>Find Your Theater</button>
+                            <Link to={`${movie.imdb}`}>
+                                <img className='imdb-logo' src={IMDB}></img>
+                            </Link>
+                        <img className='movie-picture' src={Pic}></img>
+                        <button className="movie-theater-btn" onClick={this.handleClick}>Find Your Theater</button>
                     </div>
                                    
                     <div className='movie-details'>

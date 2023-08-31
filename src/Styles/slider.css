@@ -12,7 +12,7 @@
   font-size: 3.5rem;
   text-align: center;
   font-family: 'Caveat', cursive;
-  margin-left: 15%;
+  margin-left: 5%;
   color: rgb(45, 252, 218);
 }
 
@@ -109,7 +109,7 @@
 }
 
 .slider-controler{
-  margin-left: 12%;
+  margin-left: 4%;
 }
 
 .slider-controler .slider-arrow {
