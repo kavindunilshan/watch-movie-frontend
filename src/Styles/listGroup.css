@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+
+
+.list-group {
+    list-style-type: none;
+    margin-top: 4%;
+    margin-left: 4%;
+    width: 20%;
+
+}
+
+.list-group-item {
+    background-color: rgb(40, 202, 202);
+    font-size: 160%;
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.list-group-item-active {
+    background-color: rgb(187, 228, 228);
+}
+
+.list-group-item:hover {
+    border: 1px solid rgb(187, 228, 228);
+}

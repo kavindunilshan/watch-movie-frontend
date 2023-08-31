@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@600&display=swap');
+
+.theater-page {
+    margin-left: 40px;
+    color: azure;
+}
+
+.theater-topic {
+    font-size: 260%;
+    font-family: 'Shadows Into Light', serif;
+    font-weight: 200;
+}
+
+.theater-review {
+    font-size: 120%;
+    font-family: 'Roboto Slab', serif;
+    margin: 40px 100px 40px 20px;
+    font-weight: 400;
+}
+
+.theater-details-content {
+    font-size: 120%;
+    font-family: 'Domine', serif;
+    font-weight: 400;
+    margin-top: 2%;
+    margin-left: 6%;
+}
+
+.theater-details-content-each {
+    margin-top: 16px;
+}
+
+.theater-btn {
+    margin: 20px 20px 20px 80px;
+    color: black;
+    padding: 8px 16px 8px 16px;
+    font-size: 150%;
+    font-family: 'Courgette', cursive;
+    border-radius: 20px;
+    background-color: rgb(45, 252, 218);
+}
+
+.theater-location-btn {
+    float: right;
+    margin-right: 100px;
+}
+
+.theater-btn:hover {
+    border: 2px solid white;
+}
+

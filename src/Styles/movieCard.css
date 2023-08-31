@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@600&display=swap');
+
+.mc-list{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5rem;
+}
+
+.mc{
+  position: relative;
+  margin: 1rem;
+  flex: 1 0 25rem;
+  max-width: 30rem;
+  height: 30rem;
+  transition: 0.2s;
+  background-color: aliceblue;
+  border-radius: 20px;
+}
+
+.mc:hover{
+  transform: translateY(-0.2rem);
+  box-shadow: 0.5rem 0.75rem 0.5rem #53a7ac;
+}
+
+.mc-image{
+  object-fit: cover;
+  width: 30rem;
+  height: 22rem;
+  border-radius: 20px;
+  border-bottom: 1px solid black;
+}
+
+.mc-content {
+  margin: 0.5rem;
+}
+
+.mc-divider {
+  height: 2px;
+}
+
+.mc-2, 
+.mc-3 {
+  margin: 1rem 4px 4px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Courgette', cursive;
+  font-size: 90%;
+}
+
+.mc-3 {
+  margin-top: 10px;
+}

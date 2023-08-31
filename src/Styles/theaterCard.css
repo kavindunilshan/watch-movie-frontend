@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@600&display=swap');
+
+.tmc-list{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5rem;
+}
+
+.tmc{
+  position: relative;
+  margin: 1rem;
+  flex: 1 0 25rem;
+  max-width: 30rem;
+  height: 30rem;
+  transition: 0.2s;
+  background-color: aliceblue;
+  border-radius: 20px;
+}
+
+.tmc:hover{
+  transform: translateY(-0.2rem);
+  box-shadow: 0.5rem 0.75rem 0.5rem #53a7ac;
+}
+
+.tmc-image{
+  object-fit: cover;
+  width: 30rem;
+  height: 17rem;
+  border-radius: 20px;
+}
+
+.tmc-content {
+  margin: 0.5rem;
+}
+
+.tmc-name{
+  font-family: 'Domine', serif;
+  text-align: center;
+  font-size: 150%;
+}
+
+.tmc-description{
+  margin-top: 6px;
+  font-family: 'Courgette', cursive;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 4px;
+}
+
+.tmc-divider {
+  height: 2px;
+}
+
+.tmc-2, 
+.tmc-3 {
+  margin: 1rem 4px 4px 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Courgette', cursive;
+  font-size: 90%;
+}
+
+.tmc-3 {
+  margin-top: 10px;
+}

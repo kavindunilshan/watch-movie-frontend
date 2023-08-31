@@ -1,0 +1,60 @@
+import React, { Component } from 'react'
+import Input from './input';
+import '../Styles/login.css'
+import Logo from "../Images/logo.png"
+
+class Login extends Component {
+    state = { data : {username: "", password: ""} , errors: {username: "", password: ""} } 
+
+    handleChange = ({currentTarget: input}) => {
+        const data = {...this.state.data};
+        data[input.id] = input.value;
+        this.setState({data});
+    }
+
+    handleSubmit = () => {
+        console.log("Handling the submit");
+    }
+
+    render() {
+        const {username, password} = this.state.data;
+        const {error} = this.state;
+        return (
+            <React.Fragment>
+                <div className='login-container'>
+                    <form onSubmit={this.handleSubmit}>
+                    <div className='login-logo-container'>
+                        <img className='login-logo' src={Logo}></img>
+                    </div>
+                    <div className='input-container'>
+                        <div className='login-input username'>
+                            <Input 
+                                name={"username"}
+                                label={"Username"}
+                                value={username}
+                                onChange={this.handleChange}
+                                error={error}
+                                type={'text'}
+                            />
+                        </div>
+
+                        <div className='login-input password'>
+                            <Input 
+                                name={"password"}
+                                label={"Password"}
+                                value={password}
+                                onChange={this.handleChange}
+                                error={error}
+                                type={'password'}
+                            />
+                        </div>
+                    </div>
+                        <button className="login-btn">Login</button>
+                    </form>
+                </div>
+            </React.Fragment>
+        );
+    }
+}
+ 
+export default Login;
