@@ -19,7 +19,7 @@ export function MovieCard(props) {
                         <div className='mc-ratings'>Ratings: {props.ratings}</div>
                     </div>
                     <div className='mc-4'>
-                        <button className="mc-btn" onClick={handleClick}>Book</button>
+                        <button className="mc-btn" onClick={props.onClick}>{props.label}</button>
                     </div>
                 </div>
             </div>

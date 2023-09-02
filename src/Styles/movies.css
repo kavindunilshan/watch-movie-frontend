@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@600&display=swap');
+
+.mv-page{
+    display: flex;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.mv-left {
+    position: absolute;
+}
+
+.mv-dd {
+    margin-top: 38%;
+}
+
+.mv-right {
+    position: absolute;
+    margin-left: 24%;
+}
+
+.mv-cards-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mv-search {
+    margin-left: 22%;
+}
+
+.mv-search-input {
+    margin-top: 12px;
+    margin-left: 75px;
+    padding: 4px 12px 4px 12px;
+    background-color: black;
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 120%;
+    font-family: 'Domine';
+    text-align: center;
+}
+
+.mv-search-input:focus {
+    border-radius: 20px;
+    outline: none;
+    border: 2px solid gold;
+    
+}

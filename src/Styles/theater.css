@@ -3,8 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Domine:wght@600&display=swap');
 
 .theater-page {
-    margin-left: 40px;
+    margin-left: 5%;
     margin-top: 2%;
+    margin-right: 5%;
 }
 
 .theater-topic {

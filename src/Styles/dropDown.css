@@ -1,0 +1,33 @@
+.dd {
+    color: rgb(255, 255, 255);
+    width: 200px;
+    height: 60px;
+    font-family: 'Domine', serif;
+    text-align: center;
+    font-size: 120%;
+    display: block;
+}
+
+.dd-label {
+    margin-bottom: 130px;
+}
+
+.dd-container {
+    text-align: center;
+    background-color: black;
+    color: rgb(255, 255, 255);
+    font-family: 'Domine', serif;
+    height: 40px;
+    width: 140px;
+    border-radius: 20px;
+    font-weight: 160%;
+    border: 2px solid gold;
+    margin-top: 10px;
+}
+
+/* .dd-option {
+    height: 30px;
+    width: 140px;
+    border-radius: 20px;
+    border: 2px solid gold;
+} */

@@ -9,6 +9,11 @@ import { withRouter } from './cs';
 import { MovieCard } from './movieCard';
 
 class Theater extends Component {
+    constructor(props) {
+        super(props);
+        this.targetRef1 = React.createRef();
+        this.targetRef2 = React.createRef();
+  }
     state = {theater:{}, location:[], reviews:[], showDetails:false, showLocation:false};
 
     componentDidMount() { 
@@ -20,11 +25,25 @@ class Theater extends Component {
     handleDetails = () => {
         const showDetails = !this.state.showDetails;
         this.setState({showDetails, showLocation:false});
+
+        if(showDetails)
+            this.targetRef2.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest'
+            });
     }
 
     handleLocation = () => {
         const showLocation = !this.state.showLocation;
         this.setState({showLocation, showDetails:false});
+
+        if (showLocation)
+            this.targetRef1.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest'
+            });
     }
 
     handleMap = () => {
@@ -44,27 +63,31 @@ class Theater extends Component {
                         <button className="theater-btn theater-location-btn" onClick={this.handleLocation}>Theater Location</button>
                     </div>
 
-                    {   theater && showDetails &&
-                        <div className='theater-details'>
-                            <h1 className='theater-topic'>Theater Details</h1>
-                            <div className='theater-details-content'>
-                                <div className='theater-details-content-each'>Name: {theater.name}</div>
-                                <div className='theater-details-content-each'>Dimention: {theater.dimension}</div>
-                                <div className='theater-details-content-each'>City: {theater.city}</div>
-                                <div className='theater-details-content-each'>WatchMovie ratings: {theater.ratings}</div>
+                    <div ref={this.targetRef2}>
+                        {   theater && showDetails &&
+                            <div className='theater-details'>
+                                <h1 className='theater-topic'>Theater Details</h1>
+                                <div className='theater-details-content'>
+                                    <div className='theater-details-content-each'>Name: {theater.name}</div>
+                                    <div className='theater-details-content-each'>Dimention: {theater.dimension}</div>
+                                    <div className='theater-details-content-each'>City: {theater.city}</div>
+                                    <div className='theater-details-content-each'>WatchMovie ratings: {theater.ratings}</div>
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
 
-                    {   theater && showLocation && 
-                        <div className='theater-details'>
-                            <h1 className='theater-topic'>Theater Location</h1>
+                    <div ref={this.targetRef1}>
+                        {   theater && showLocation && 
+                            <div className='theater-details'>
+                                <h1 className='theater-topic'>Theater Location</h1>
 
-                            <div className='theater-maps'>
-                                <AddressMap/>
+                                <div className='theater-maps'>
+                                    <AddressMap/>
+                                </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
 
                     <div className='theater-movies-list'>
                         <h1 className='theater-topic'>PREMIERING NOW</h1>
