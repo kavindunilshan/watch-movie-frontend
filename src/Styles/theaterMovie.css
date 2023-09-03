@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@600&display=swap');
+
+.tmb {
+    margin-top: 2%;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+.tmb-active {
+    opacity: 0.4;
+}
+
+.tmb-heading {
+    font-size: 140%;
+    color: azure;
+    font-family: 'Courgette', cursive;
+    text-align: center;
+}
+
+.tmb-sub-heading {
+    font-size: 160%;
+    color: aliceblue;
+    font-family: 'Domine', serif;
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.tmb-th-name {}
+
+.tmb-th-description {
+    margin-top: 1%;
+    font-size: 60%;
+}
+
+.tmb-movie-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tmb-movie-picture {
+    margin-top: 2%;
+    width: 40%;
+}
+
+.tmb-mv-name {
+    margin-top: 2%;
+    font-size: 140%;
+    color: azure;
+    font-family: 'Courgette', cursive;
+    text-align: center;
+}
+
+.tmb-show-times {
+}
+
+.tmb-ticket-price {
+    color: aliceblue;
+    font-family: 'Domine', serif;
+    margin-left: 12%;
+    margin-top: 1%;
+}
+
+.tmb-tickets {
+    
+}
+
+.tmb-total {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(24, 208, 236);
+    font-family: 'Courgette', cursive;
+    margin-left: 12%;
+    font-size: 120%;
+    margin-top: 4%;
+    border-radius: 40px;
+    background-color: rgb(0, 0, 0);
+    width: 200px;
+    height: 50px;
+}
+
+.total-seat-details {
+    display: flex;
+}
+
+.tmb-btn {
+    color: rgb(0, 0, 0);
+    padding: 8px 16px 8px 16px;
+    font-size: 150%;
+    font-family: 'Courgette', cursive;
+    border-radius: 20px;
+    background-color: rgb(24, 208, 236);
+    border-radius: 20px;
+    margin-left: 4%;
+    margin-top: 4%;
+}
+
+.tmb-btn:hover {
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.tmb-seat-selection {
+    position: absolute;
+    top: 30%;
+    left: 25%;
+    width: 52%;
+    opacity: 4;
+}

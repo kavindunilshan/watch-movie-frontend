@@ -8,6 +8,7 @@ import Theater from './Components/theater';
 import Theaters from './Components/theaters';
 import Movies from './Components/movies';
 import { Route, Router, Routes } from 'react-router-dom';
+import TheaterMovie from './Components/theaterMovie';
 
 class App extends Component {
   state = { items:[
@@ -25,11 +26,7 @@ class App extends Component {
       return (
       <React.Fragment>
         <NavBar/>
-
-        {/* <Routes>
-          <Route path="/theaters" element={<Theaters/>}/>
-        </Routes> */}
-        <Theaters/>
+        <TheaterMovie/>
       </React.Fragment>
     );
   }

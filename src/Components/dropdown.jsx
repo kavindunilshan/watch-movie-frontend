@@ -10,16 +10,20 @@ const Dropdown = ({items, label, onSelect}) => {
   };
 
   return (
-    <div className='dd'>
-      <label className='dd-label' htmlFor="itemSelect">Select {label}:</label>
-      <select className='dd-container' id="itemSelect" value={selectedItem} onChange={handleChange}>
-        {items.map((item, index) => (
-          <option className='dd-option' key={index} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-    </div>
+    <React.Fragment>
+      {items && 
+        <div className='dd'>
+          <label className='dd-label' htmlFor="itemSelect">Select {label}:</label>
+          <select className='dd-container' id="itemSelect" value={selectedItem} onChange={handleChange}>
+            {items.map((item, index) => (
+              <option className='dd-option' key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+      }
+    </React.Fragment>
   );
 };
 

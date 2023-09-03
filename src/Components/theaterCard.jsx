@@ -1,7 +1,7 @@
 import 'font-awesome/css/font-awesome.min.css'
 import "../Styles/theaterCard.css"
 
-export function TheaterCard({id, name, description, district, city, dimension, ratings, image}) {
+export function TheaterCard({id, name, description, district, city, label, dimension, ratings, image, onClick}) {
 
     return(
         <div className='tmc-list'>
@@ -23,7 +23,7 @@ export function TheaterCard({id, name, description, district, city, dimension, r
                         <div className='tmc-ratings'>Ratings: {ratings}</div>
                     </div>
                     <div className='tmc-4'>
-                        <button className="tmc-btn" onClick={() => props.onClick(name)}>{label}</button>
+                        <button className="tmc-btn" onClick={() => onClick(name)}>{label}</button>
                     </div>
                 </div>
             </div>
