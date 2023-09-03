@@ -22,7 +22,7 @@ class Login extends Component {
         return (
             <React.Fragment>
                 <div className='login-container'>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} className='login-form'>
                     <div className='login-logo-container'>
                         <img className='login-logo' src={Logo}></img>
                     </div>
@@ -50,6 +50,7 @@ class Login extends Component {
                         </div>
                     </div>
                         <button className="login-btn">Login</button>
+                        <button className="login-btn">Google</button>
                     </form>
                 </div>
             </React.Fragment>

@@ -9,6 +9,7 @@ import Theaters from './Components/theaters';
 import Movies from './Components/movies';
 import { Route, Router, Routes } from 'react-router-dom';
 import TheaterMovie from './Components/theaterMovie';
+import Register from './Components/register';
 
 class App extends Component {
   state = { items:[
@@ -25,8 +26,7 @@ class App extends Component {
   render() { 
       return (
       <React.Fragment>
-        <NavBar/>
-        <TheaterMovie/>
+        <Register/>
       </React.Fragment>
     );
   }
