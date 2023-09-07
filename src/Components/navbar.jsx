@@ -31,12 +31,12 @@ function NavBar() {
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <NavLink className="nav-link" aria-current="page" to="/movies">
+            <NavLink className="nav-link" aria-current="page" to="/home">
               Home
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" aria-current="page" to="/movies">
+            <NavLink className="nav-link" aria-current="page" to="/theaters">
               Theaters
             </NavLink>
           </li>
@@ -46,7 +46,7 @@ function NavBar() {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" aria-current="page" to="/movies">
+            <NavLink className="nav-link" aria-current="page" to="/about-us">
               About-Us
             </NavLink>
           </li>
@@ -55,12 +55,12 @@ function NavBar() {
       {!authUser && 
         <section className="nav-btns">
             <button className="nav-btn">
-            <Link className="btn-link" aria-current="page" to="/movies">
+            <Link className="btn-link" aria-current="page" to="/login">
                 Login
             </Link>
             </button>
             <button className="nav-btn">
-            <Link className="btn-link" aria-current="page" to="/movies">
+            <Link className="btn-link" aria-current="page" to="/register">
                 Register
             </Link>
             </button>
@@ -70,7 +70,7 @@ function NavBar() {
     {authUser && 
         <section className="nav-btns">
             <button className="nav-btn">
-            <Link className="btn-link" aria-current="page" to="/movies">
+            <Link className="btn-link" aria-current="page" to="/logout">
                 LogOut
             </Link>
             </button>

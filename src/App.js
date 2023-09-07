@@ -10,24 +10,29 @@ import Movies from './Components/movies';
 import { Route, Router, Routes } from 'react-router-dom';
 import TheaterMovie from './Components/theaterMovie';
 import Register from './Components/register';
+import theater from './Components/theater';
 
 class App extends Component {
-  state = { items:[
-    { _id: "5b21ca3eeb7f6fbccd471rt18", name: "All theaters" },
-    { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
-    { _id: "5b21ca3eeb7f6fbccd471814", name: "Comedy" },
-    { _id: "5b21ca3eeb7f6fbccd471820", name: "Thriller" }
-  ], selected: { _id: "5b21ca3eeb7f6fbccd471rt18", name: "All theaters" }}
+  state = {}
 
-  onSelect = (item) => {
-    this.setState({selected:item})
-  }
+
 
   render() { 
       return (
       <React.Fragment>
         <NavBar/>
-        <Movie/>
+            <Routes>
+              <Route path='/movies' element={<Movies/>}/>
+              <Route path='/login' element={<Login/>}/>
+              <Route path='/logout' element={<Logout/>}/>
+              <Route path='/register' element={<Register/>}/>
+              <Route path='/customers' element={<Customers/>}/>
+              <Route path='/rentals' element={<Rentals/>}/>
+              <Route path='/movieForm' element={getCurrentUser() ? <MoviesForm/>:<Navigate to="/login" state={this.props.location}/>}/>
+              <Route path='/not-found' element={<NotFound/>}/>
+              <Route path='/' exact element={<Navigate to="/movies" replace/>}/>
+              <Route path='*' element={<Navigate to="/not-found" replace/>}/>
+            </Routes>
       </React.Fragment>
     );
   }

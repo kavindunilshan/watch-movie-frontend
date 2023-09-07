@@ -1,9 +1,15 @@
+import { signOut } from 'firebase/auth';
 import React, { Component } from 'react'
-import { logout } from '../services/authService';
+import { auth } from '../firebase';
+
 
 class Logout extends Component {
     async componentDidMount() {
-        await logout();
+        signOut(auth).then(() => {
+            console.log("Log out");
+        }).catch((error) => {
+            console.log(error);
+        });
         window.location = "/";
     }
     render() { 
