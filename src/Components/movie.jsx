@@ -4,9 +4,16 @@ import { Link } from 'react-router-dom';
 import  Pic from "../assets/Transformers.jpg"
 import IMDB from "../assets/imdb.png"
 import "../Styles/movie.css"
+import { fetchData } from '../Services/httpService';
 
 class Movie extends Component {
-    state = {movie:[], casts:[], reviews:[]} 
+    state = {movie:[], casts:[], reviews:[]}
+
+    async componentDidMount() {
+        const movie = await fetchData();
+        this.setState({movie: movie[0]});
+    }
+
     render() { 
         const {movie, casts, reviews} = this.state;
         return (
@@ -24,11 +31,11 @@ class Movie extends Component {
                         <h1 className='movie-topic'>Movie Details</h1>
 
                         {movie && <div className='movie-details-content'>
-                            <div className='movie-details-content-each'>Title: {movie.title}</div>
-                            <div className='movie-details-content-each'>Dimention: {movie.title}</div>
-                            <div className='movie-details-content-each'>Status: {movie.title}</div>
+                            <div className='movie-details-content-each'>Title: {movie.name}</div>
+                            <div className='movie-details-content-each'>Dimention: {movie.dimesion}</div>
+                            <div className='movie-details-content-each'>Status: {movie.status}</div>
                             <div className='movie-details-content-each'>Genre: {movie.genre}</div>
-                            <div className='movie-details-content-each'>Duration: {movie.title}</div>
+                            <div className='movie-details-content-each'>Duration: {movie.duration}</div>
                             <div className='movie-details-content-each'>WatchMovie ratings: {movie.ratings}</div>
                         </div>}
 

@@ -1,14 +1,14 @@
 .register-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     text-align: center;
     justify-content: center;
     width: 450px;
     border-radius: 20px;
     border: 2px solid #44BBA4;
-    margin-top: 4%;
-    margin-left: 38%;
+    margin: 4% auto;
+
 }
 
 .register-form {
@@ -32,9 +32,25 @@
     font-size: 100%;
     font-family: 'Domine';
     font-weight: bold;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.register-btn:hover {
+    transform: scale(1.1);
+    background-color: rgb(5, 109, 112);
+    color: black;
 }
 
 .register-logo {
     width: 200px;
     height: 100px;
+}
+
+@media screen and (max-width: 700px) {
+    .register-container {
+            width: 350px;
+            border-radius: 20px;
+            margin: 4% auto;
+    
+        }
 }

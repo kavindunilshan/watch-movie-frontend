@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import Input from './input';
 import '../Styles/register.css'
 import Logo from "../Images/logo.png"
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 
 class Register extends Component {
-    state = { data : {name: "", username: "", password: "", password2: ""} , errors: {name: "", username: "", password: "", password2: ""} } 
+    state = { data : {name: "", username: "", password1: "", password2: ""} , errors: {name: "", username: "", password: "", password2: ""} } 
 
     handleChange = ({currentTarget: input}) => {
         const data = {...this.state.data};
@@ -12,8 +14,16 @@ class Register extends Component {
         this.setState({data});
     }
 
-    handleSubmit = () => {
-        console.log("Handling the submit");
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const {username, password1} = this.state.data;
+        createUserWithEmailAndPassword(auth, username, password1)
+        .then((userCredential) => {
+            console.log(userCredential);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 
     render() {
@@ -50,7 +60,7 @@ class Register extends Component {
 
                         <div className='register-input password'>
                             <Input 
-                                name={"password"}
+                                name={"password1"}
                                 label={"Password"}
                                 value={password}
                                 onChange={this.handleChange}
@@ -60,7 +70,7 @@ class Register extends Component {
                         </div>
                         <div className='register-input password'>
                             <Input 
-                                name={"password"}
+                                name={"password2"}
                                 label={"Confirm Password"}
                                 value={password2}
                                 onChange={this.handleChange}

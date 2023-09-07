@@ -26,7 +26,8 @@ class App extends Component {
   render() { 
       return (
       <React.Fragment>
-        <Register/>
+        <NavBar/>
+        <Movie/>
       </React.Fragment>
     );
   }

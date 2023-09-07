@@ -15,7 +15,8 @@
 }
 
 .form-field {
-    display: block;
+    display: flex;
+    text-align: center;
     margin-top: 4px;
     padding: 4px 12px 4px 12px;
     background-color: black;

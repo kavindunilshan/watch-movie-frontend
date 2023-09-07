@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Input from './input';
 import '../Styles/login.css'
 import Logo from "../Images/logo.png"
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import {auth} from "../../src/firebase"
 
 class Login extends Component {
     state = { data : {username: "", password: ""} , errors: {username: "", password: ""} } 
@@ -12,8 +14,16 @@ class Login extends Component {
         this.setState({data});
     }
 
-    handleSubmit = () => {
-        console.log("Handling the submit");
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const {username, password} = this.state.data;
+        signInWithEmailAndPassword(auth, username, password)
+        .then((userCredential) => {
+            console.log(userCredential);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 
     render() {
