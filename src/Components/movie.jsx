@@ -5,13 +5,23 @@ import  Pic from "../assets/Transformers.jpg"
 import IMDB from "../assets/imdb.png"
 import "../Styles/movie.css"
 import { fetchData } from '../Services/httpService';
+import { withRouter } from './cs';
 
 class Movie extends Component {
     state = {movie:[], casts:[], reviews:[]}
 
     async componentDidMount() {
-        const movie = await fetchData();
-        this.setState({movie: movie[0]});
+        try {
+            const movie = await fetchData();
+            this.setState({movie: movie[0]});
+        } catch {
+            console.log("Error has occured");
+        }
+    }
+
+    handleClick = () => {
+        const navigate = this.props.navigate;
+        navigate("/theaters")
     }
 
     render() { 
@@ -19,12 +29,13 @@ class Movie extends Component {
         return (
             <React.Fragment>
                 <div className='movie-page'>
+                    <img className='movie-picture' src={movie.image}></img>
                     <div className='movie-links'>
-                            <Link to={`${movie.imdb}`}>
-                                <img className='imdb-logo' src={IMDB}></img>
-                            </Link>
-                        <img className='movie-picture' src={Pic}></img>
-                        <button className="movie-theater-btn" onClick={this.handleClick}>Find Your Theater</button>
+                        <Link to={`${movie.imdb}`}>
+                            <button className="movie-btn">IMDB Profile</button>
+                        </Link>
+
+                        <button className="movie-btn" onClick={this.handleClick}>Find Your Theater</button>
                     </div>
                                    
                     <div className='movie-details'>
@@ -38,25 +49,12 @@ class Movie extends Component {
                             <div className='movie-details-content-each'>Duration: {movie.duration}</div>
                             <div className='movie-details-content-each'>WatchMovie ratings: {movie.ratings}</div>
                         </div>}
-
-                        {/* {movie && <div className='movie-explore'>
-                            <div className='explore-image'>
-                                <Link to={`${movie.imdb}`}>
-                                    <img src='../Images/logo.png'></img>
-                                </Link>
-                            </div>
-                            <div className='explore-image'>
-                                <Link to={`${movie.imdb}`}>
-                                    <img src='../Images/logo.png'></img>
-                                </Link>
-                            </div>
-                        </div>} */}
                     </div>
 
                     <div className='movie-trailer-details'>
                         <h1 className='movie-topic'>Movie Trailer</h1>
                         <iframe className='movie-trailer'
-                            src="https://www.youtube.com/embed/itnqEauWQZM">
+                            src={movie.trailer}>
                         </iframe>
                     </div>
 
@@ -94,4 +92,4 @@ class Movie extends Component {
     }
 }
  
-export default Movie;
+export default withRouter(Movie);
