@@ -3,6 +3,8 @@ import Dropdown from './dropdown';
 import  Pic from "../assets/Transformers.jpg"
 import TheaterCard from './theaterCard';
 import "../Styles/theaters.css"
+import { withRouter } from './cs';
+import { fetchData } from '../Services/httpService';
 
 class Theaters extends Component {
     state = {AllTheaters:[], theaters:[], selectedVal: "", searchValue: ""};
@@ -13,6 +15,16 @@ class Theaters extends Component {
     'Batticaloa', 'Ampara', 'Trincomalee', 'Kurunegala', 'Puttalam', 'Anuradhapura',
     'Polonnaruwa', 'Badulla', 'Monaragala', 'Ratnapura', 'Kegalle'
     ];
+
+    async componentDidMount() {
+        try {
+            const theaters = await fetchData("/theaters");
+            this.setState({movies: theaters});
+            console.log(this.state.movies);
+        } catch {
+            console.log("Error has occured");
+        }
+    }
 
     handleSelect = (value) => {
         const selectedVal = value;
@@ -31,11 +43,13 @@ class Theaters extends Component {
         this.setState({searchValue});
     }
 
-    handleClick = (name) => {
-        console.log(name)
+    handleClick = (id) => {
+        const navigate = this.props.navigate;
+        navigate(`/theater/?tid=${id}`)
     }
 
-    render() { 
+    render() {
+        const {theaters} = this.state;
         return (
             <React.Fragment>
                 <div className='th-page'>
@@ -50,21 +64,9 @@ class Theaters extends Component {
                             <input className='th-search-input' placeholder='Search your theater' type='text' value={this.state.searchValue} onChange={this.handleChange}></input>
                         </div>
                         <div className='theater-cards-list'>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.7" label="Visit" onClick={this.handleClick}/>
-                        <TheaterCard image={Pic} name="Regal Cinema" description="Get your best cinema experience" district="Matara" city="Akurassa" dimension="2D and 3D" ratings="4.8" label="Visit" onClick={this.handleClick}/>
+                            {theaters && theaters.map(theater => {
+                                <TheaterCard id={theater.tid} image={theater.image} name={theater.name} description={theater.description} district={theater.district} city={theater.city} dimension={theater.dimension} ratings={theater.ratings} label="Visit" onClick={this.handleClick}/>
+                            })}
                         </div>
                     </div>
                     
@@ -74,4 +76,4 @@ class Theaters extends Component {
     }
 }
  
-export default Theaters;
+export default withRouter(Theaters);
