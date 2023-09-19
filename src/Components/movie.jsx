@@ -10,10 +10,33 @@ import { withRouter } from './cs';
 class Movie extends Component {
     state = {movie:[], casts:[], reviews:[]}
 
+    extractVideoId = (url) => {
+        const match = url.match(/[?&]v=([^&]+)/) || url.match(/youtu.be\/([^?]+)/) || url.match(/embed\/([^?]+)/) || url.match(/\/v\/([^?]+)/);
+        if (match && match[1]) {
+            return match[1];
+        }
+        return null;
+        }
+
+    generateEmbedLink = (link) => {
+        const videoId = this.extractVideoId(link);
+        if (videoId) {
+            return `https://www.youtube.com/embed/${videoId}`;
+        }
+        return null;
+        }
+
     async componentDidMount() {
+        const {searchParams} = this.props;
+        const mid = searchParams.get("mid");
+        console.log("working", mid);
+
         try {
-            const movie = await fetchData();
-            this.setState({movie: movie[0]});
+            const movies = await fetchData("/movies");
+            var movie = movies[mid-1];
+            const trailer = this.generateEmbedLink(movie.trailer);
+            movie.trailer = trailer;
+            this.setState({movie});
         } catch {
             console.log("Error has occured");
         }
@@ -29,9 +52,9 @@ class Movie extends Component {
         return (
             <React.Fragment>
                 <div className='movie-page'>
-                    <img className='movie-picture' src={movie.image}></img>
+                    {movie.pictures && <img className='movie-picture' src={movie.pictures[1].name}></img>}
                     <div className='movie-links'>
-                        <Link to={`${movie.imdb}`}>
+                        <Link to={`${movie.imdb}`} target='_blank'>
                             <button className="movie-btn">IMDB Profile</button>
                         </Link>
 
@@ -54,7 +77,8 @@ class Movie extends Component {
                     <div className='movie-trailer-details'>
                         <h1 className='movie-topic'>Movie Trailer</h1>
                         <iframe className='movie-trailer'
-                            src={movie.trailer}>
+                            src={movie.trailer}
+                            allowFullScreen>
                         </iframe>
                     </div>
 

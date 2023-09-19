@@ -7,6 +7,7 @@ import IMDB from "../assets/imdb.png"
 import { AddressMap } from './map';
 import { withRouter } from './cs';
 import { MovieCard } from './movieCard';
+import { fetchData } from '../Services/httpService';
 
 class Theater extends Component {
     constructor(props) {
@@ -14,12 +15,20 @@ class Theater extends Component {
         this.targetRef1 = React.createRef();
         this.targetRef2 = React.createRef();
   }
+
     state = {theater:{}, location:[], reviews:[], showDetails:false, showLocation:false};
 
-    componentDidMount() { 
-        const theater = {name:"Regal Cinema", dimension:"2D and 3D", city:"Matara",
-                        ratings:"4.6"}
-        this.setState({theater});
+    async componentDidMount() { 
+        const {searchParams} = this.props;
+        const tid = searchParams.get("tid");
+
+        try {
+            const theaters = await fetchData("/theaters");
+            this.setState({theater: theaters[tid]});
+            console.log(this.state.theater);
+        } catch {
+            console.log("Error has occured");
+        }
      }
     
     handleDetails = () => {

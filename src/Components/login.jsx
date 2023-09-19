@@ -4,9 +4,10 @@ import '../Styles/login.css'
 import Logo from "../Images/logo.png"
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import {auth} from "../../src/firebase"
+import { withRouter } from './cs';
 
 class Login extends Component {
-    state = { data : {username: "", password: ""} , errors: {username: "", password: ""} } 
+    state = { data : {username: "", password: ""} , errors: {username: "", password: ""} }
 
     handleChange = ({currentTarget: input}) => {
         const data = {...this.state.data};
@@ -15,15 +16,18 @@ class Login extends Component {
     }
 
     handleSubmit = (e) => {
+        const navigate = this.props.navigate; 
         e.preventDefault();
         const {username, password} = this.state.data;
         signInWithEmailAndPassword(auth, username, password)
         .then((userCredential) => {
             console.log(userCredential);
+            navigate("/")
         })
         .catch((error) => {
             console.log(error);
         });
+        
     }
 
     render() {
@@ -68,4 +72,4 @@ class Login extends Component {
     }
 }
  
-export default Login;
+export default withRouter(Login);
