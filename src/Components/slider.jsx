@@ -59,9 +59,9 @@ function Slider() {
         className="swiper_container"
       >
 
-        {images && images.map((image) => {
+        {images && images.map((image, index) => {
           if(image.id.pid === 1) {
-            return  <SwiperSlide>
+            return  <SwiperSlide key={index}>
                       <img src={image.name} alt="slide_image" />
                     </SwiperSlide>
           }
