@@ -13,6 +13,8 @@ import Register from './Components/register';
 import theater from './Components/theater';
 import NotFound from './Components/not-found';
 import Logout from './Components/logout';
+import Home from './Components/home';
+import AboutUs from './Components/about-us';
 
 class App extends Component {
   state = {}
@@ -30,10 +32,11 @@ class App extends Component {
               <Route path='/logout' element={<Logout/>}/>
               <Route path='/register' element={<Register/>}/>
               <Route path='/movie' element={<Movie/>}/>
+              <Route path='/about-us' element={<AboutUs/>}/>
               <Route path='/theater' element={<Theater/>}/>
               {/* <Route path='/movieForm' element={getCurrentUser() ? <MoviesForm/>:<Navigate to="/login" state={this.props.location}/>}/> */}
               <Route path='/not-found' element={<NotFound/>}/>
-              <Route path='/' exact element={<Navigate to="/movie" replace/>}/>
+              <Route path='/' exact element={<Home/>}/>
               <Route path='*' element={<Navigate to="/not-found" replace/>}/>
             </Routes>
       </React.Fragment>
