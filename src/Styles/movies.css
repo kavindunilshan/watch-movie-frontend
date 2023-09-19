@@ -20,19 +20,20 @@
 }
 
 .mv-cards-list {
+    margin-top: 5%;
     display: flex;
     flex-wrap: wrap;
 }
 
 .mv-search {
-    margin-left: 22%;
+    margin-left: 25%;
 }
 
 .mv-search-input {
     margin-top: 12px;
     margin-left: 75px;
     padding: 4px 12px 4px 12px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.466);
     width: 300px;
     height: 50px;
     border: none;

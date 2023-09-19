@@ -25,9 +25,10 @@
     margin-top: 10px;
 }
 
-/* .dd-option {
-    height: 30px;
-    width: 140px;
+.dd-option {
+    padding: 4px;
+    font-size: 120%;
+    background-color: rgba(0, 0, 0, 0.238);
     border-radius: 20px;
     border: 2px solid gold;
-} */
+}

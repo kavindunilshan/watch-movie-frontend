@@ -17,15 +17,15 @@
 .form-field {
     display: flex;
     text-align: center;
-    margin-top: 4px;
+    margin-top: 3px;
     padding: 4px 12px 4px 12px;
-    background-color: black;
+    background-color: transparent;
     width: 300px;
-    height: 50px;
+    height: 40px;
     border-radius: 20px;
     border: none;
     border-bottom: 2px solid #44BBA4;
-    color: white;
+    color: gold;
     font-size: 100%;
     font-family: 'Domine';
 }
