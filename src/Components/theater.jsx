@@ -64,11 +64,12 @@ class Theater extends Component {
         const {theater, casts, reviews, showDetails, showLocation} = this.state;
         return (
             <React.Fragment>
+                {
+                    theater && 
                 <div className='theater-page'>
-
+                    {theater.pictures && <img className='theater-picture' src={theater.pictures[1].name}></img>}
                     <div className='theater-links'>
                         <button className="theater-btn theater-details-btn" onClick={this.handleDetails}>Theater Details</button>
-                        <img className='theater-picture' src={Pic}></img>
                         <button className="theater-btn theater-location-btn" onClick={this.handleLocation}>Theater Location</button>
                     </div>
 
@@ -101,10 +102,7 @@ class Theater extends Component {
                     <div className='theater-movies-list'>
                         <h1 className='theater-topic'>PREMIERING NOW</h1>
                         <div className='theater-movie-cards-list'>
-                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
-                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
-                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
-                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
+                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6" label={"Book"}/>
                             <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
                             <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
                             <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
@@ -130,6 +128,7 @@ class Theater extends Component {
                         })}
                     </div>
                 </div>
+                }
             </React.Fragment>
         );
     }

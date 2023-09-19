@@ -23,7 +23,7 @@ export function TheaterCard({id, name, description, district, city, label, dimen
                         <div className='tmc-ratings'>Ratings: {ratings}</div>
                     </div>
                     <div className='tmc-4'>
-                        <button className="tmc-btn" onClick={() => onClick(name)}>{label}</button>
+                        <button className="tmc-btn" onClick={() => onClick(id)}>{label}</button>
                     </div>
                 </div>
             </div>

@@ -19,22 +19,25 @@ class Theaters extends Component {
     async componentDidMount() {
         try {
             const theaters = await fetchData("/theaters");
-            this.setState({movies: theaters});
-            console.log(this.state.movies);
+            this.setState({theaters: theaters, AllTheaters: theaters});
+            console.log(this.state.theaters);
         } catch {
             console.log("Error has occured");
         }
     }
 
-    handleSelect = (value) => {
+    handleLanguageSelect = (value) => {
         const selectedVal = value;
         var theaters = this.state.AllTheaters;
 
         if (selectedVal !== "All Theaters") {
-            theaters.filter(theater => theater.district === selectedVal);
+            const filteredTheaters = theaters.filter(theater => {
+                return theater.location.district === selectedVal;
+            });
+            this.setState({theaters: filteredTheaters, selectedVal});
+        } else {
+            this.setState({theaters: theaters, selectedVal});
         }
-
-        this.setState({theaters, selectedVal});
 
     }
 
@@ -55,7 +58,7 @@ class Theaters extends Component {
                 <div className='th-page'>
                     <div className='th-left'>
                         <div className='th-dd'>
-                            <Dropdown items={this.districts} onSelect={this.handleSelect} label="Select District"/>
+                            <Dropdown items={this.districts} onSelect={this.handleLanguageSelect} label="Select District"/>
                         </div>
                     </div>
 
@@ -64,8 +67,8 @@ class Theaters extends Component {
                             <input className='th-search-input' placeholder='Search your theater' type='text' value={this.state.searchValue} onChange={this.handleChange}></input>
                         </div>
                         <div className='theater-cards-list'>
-                            {theaters && theaters.map(theater => {
-                                <TheaterCard id={theater.tid} image={theater.image} name={theater.name} description={theater.description} district={theater.district} city={theater.city} dimension={theater.dimension} ratings={theater.ratings} label="Visit" onClick={this.handleClick}/>
+                            {theaters && theaters.map((theater, index) => {
+                                return <TheaterCard key={index} id={theater.tid} image={theater.pictures[0].name} name={theater.name} district={theater.location.district} description={theater.slogan} city={theater.location.city} dimension={theater.dimension} ratings={theater.ratings} label="Visit" onClick={this.handleClick}/>
                             })}
                         </div>
                     </div>
