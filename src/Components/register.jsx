@@ -4,6 +4,8 @@ import '../Styles/register.css'
 import Logo from "../Images/logo.png"
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
+import { createData } from '../Services/httpService';
+import { withRouter } from './cs';
 
 class Register extends Component {
     state = { data : {name: "", username: "", password1: "", password2: ""} , errors: {name: "", username: "", password: "", password2: ""} } 
@@ -18,8 +20,16 @@ class Register extends Component {
         e.preventDefault();
         const {username, password1} = this.state.data;
         createUserWithEmailAndPassword(auth, username, password1)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             console.log(userCredential);
+
+            var user = {id: userCredential.user.uid, username:userCredential.user.email}
+
+            const data = await createData("/users", user);
+
+            const navigate = this.props.navigate;
+            navigate("/");
+
         })
         .catch((error) => {
             console.log(error);
@@ -88,4 +98,4 @@ class Register extends Component {
     }
 }
  
-export default Register;
+export default withRouter(Register);
