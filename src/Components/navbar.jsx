@@ -31,7 +31,7 @@ function NavBar() {
       <nav className="navbar">
         <ul className="nav-list">
           <li className="nav-item">
-            <NavLink className="nav-link" aria-current="page" to="/home">
+            <NavLink className="nav-link" aria-current="page" to="/">
               Home
             </NavLink>
           </li>
