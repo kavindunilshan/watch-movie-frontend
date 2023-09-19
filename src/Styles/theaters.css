@@ -25,14 +25,14 @@
 }
 
 .th-search {
-    margin-left: 22%;
+    margin-left: 45%;
 }
 
 .th-search-input {
     margin-top: 12px;
     margin-left: 75px;
     padding: 4px 12px 4px 12px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.312);
     width: 300px;
     height: 50px;
     border: none;
