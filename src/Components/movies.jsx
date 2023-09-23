@@ -42,11 +42,12 @@ class Movies extends Component {
 
         var movies = this.state.AllMovies;
 
-        if (searchValue.length !== 0)
-            movies = movies.filter(movie => movie.name === searchValue);
-        else
+        if (searchValue.length !== 0) {
+            movies = movies.filter(movie => movie.name.toLowerCase().startsWith(searchValue.toLowerCase()));
+        }
+        else {
             movies = this.state.AllMovies;
-
+        }
         this.setState({movies: movies, searchValue});
     }
 
