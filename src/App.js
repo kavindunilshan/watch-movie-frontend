@@ -34,6 +34,7 @@ class App extends Component {
               <Route path='/movie' element={<Movie/>}/>
               <Route path='/about-us' element={<AboutUs/>}/>
               <Route path='/theater' element={<Theater/>}/>
+              <Route path='/theater-movie' element={<TheaterMovie/>}/>
               {/* <Route path='/movieForm' element={getCurrentUser() ? <MoviesForm/>:<Navigate to="/login" state={this.props.location}/>}/> */}
               <Route path='/not-found' element={<NotFound/>}/>
               <Route path='/' exact element={<Home/>}/>
