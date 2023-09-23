@@ -16,18 +16,29 @@ class Theater extends Component {
         this.targetRef2 = React.createRef();
   }
 
-    state = {theater:{}, location:[], reviews:[], showDetails:false, showLocation:false};
+    state = {theater:{}, location:[], reviews:[], movies:[], shows:[], showDetails:false, showLocation:false};
+
+    getMovies = (movies) => {
+        const MovieSet = new Set();
+        movies.forEach(element => {
+            MovieSet.add(element.id.mid);
+        });
+        console.log(Array.from(MovieSet));
+        return [...MovieSet];
+    }
 
     async componentDidMount() { 
         const {searchParams} = this.props;
         const tid = searchParams.get("tid");
 
         try {
-            const theaters = await fetchData("/theaters");
-            this.setState({theater: theaters[tid]});
-            console.log(this.state.theater);
-        } catch {
-            console.log("Error has occured");
+            const theater = await fetchData(`/theaters/${tid}`);
+            const shows = await fetchData(`/theaterMovies/${tid}`);
+            const filterShows = this.getMovies(shows).join(",");
+            const movies = await fetchData(`/movies/list?items=${filterShows}`);
+            this.setState({theater, movies, shows});
+        } catch(e) {
+            console.log("Error has occured", e);
         }
      }
     
@@ -55,13 +66,15 @@ class Theater extends Component {
             });
     }
 
-    handleMap = () => {
+    handleClick = (mid) => {
         const navigate = this.props.navigate;
-        navigate("https://www.google.com");
+        const {searchParams} = this.props;
+        const tid = searchParams.get("tid");
+        navigate(`/theater-movie/?tid=${tid}&mid=${mid}`);
     }
 
     render() { 
-        const {theater, casts, reviews, showDetails, showLocation} = this.state;
+        const {theater, casts, reviews, movies, showDetails, showLocation} = this.state;
         return (
             <React.Fragment>
                 {
@@ -102,10 +115,9 @@ class Theater extends Component {
                     <div className='theater-movies-list'>
                         <h1 className='theater-topic'>PREMIERING NOW</h1>
                         <div className='theater-movie-cards-list'>
-                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6" label={"Book"}/>
-                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
-                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
-                            <MovieCard image={Pic} status="18+" name="Transformers" genre="Action Thriller" ratings="4.6"/>
+                        {movies && movies.map((movie, index) => {
+                            return <MovieCard key={index} id={movie.mid} image={movie.pictures[1].name} status={movie.status} name={movie.name} language={movie.language} dimension={movie.dimesion} genre={movie.genre} ratings={movie.rating} label="Book" onClick={this.handleClick}/>
+                        })}
                         </div>
                     </div>
 
