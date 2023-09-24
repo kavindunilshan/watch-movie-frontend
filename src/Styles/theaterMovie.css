@@ -111,3 +111,24 @@
     width: 52%;
     opacity: 4;
 }
+
+.tmb-date-select {
+    background-color: aliceblue;
+    width: fit-content;
+    border: solid 2px gold;
+    border-radius: 5px;
+}
+
+.tmb-date {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+}
+
+.tmb-date-text {
+    color: aliceblue;
+    font-family: 'Domine', serif;
+    margin-left: 12%;
+    margin-top: 1%;
+    margin-right: 7.5%;
+}
