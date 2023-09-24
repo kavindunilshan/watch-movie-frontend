@@ -4,11 +4,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import React, { Children, Component, useState } from 'react'
 
 
-const DateField = () => {
+const DateField = ({setDate}) => {
     const [selectedDate, setSelectedDate] = useState(null);
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
+        setDate(date);
     }
 
     return (
