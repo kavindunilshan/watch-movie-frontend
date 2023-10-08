@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import "../Styles/seatSelection.css";
 
-const SeatSelection = ({ max, totalSeats, onClick }) => {
-  const [seats, setSeats] = useState(Array(totalSeats).fill(false));
+const SeatSelection = ({ max, seatData, onClick }) => {
+  const [seats, setSeats] = useState(seatData.split(""));
 
   const toggleSeat = (index) => {
     const updatedSeats = [...seats];
-    const selected = seats.filter((isSelected) => isSelected).length;
+    const selected = seats.filter((item) => item === "2").length;
 
-    if (max <= selected && !updatedSeats[index]) {
+    if ((max <= selected && updatedSeats[index] === "0") || updatedSeats[index] === "1") {
 
     } else {
-      updatedSeats[index] = !updatedSeats[index];
+      updatedSeats[index] = updatedSeats[index] === "0" ? "2": "0";
     }
     setSeats(updatedSeats);
   };
@@ -20,12 +20,14 @@ const SeatSelection = ({ max, totalSeats, onClick }) => {
     <div className='seat-selection'>
       <h1 className="screen">Screen is Here</h1>
       <div className="seat-grid">
-        {seats.map((isSelected, index) => (
+        {seats.map((item, index) => (
           <div
             key={index}
-            className={isSelected && ((index-6) % 15 == 0) ? "seat selected-seat cornar-seat": isSelected ? "seat selected-seat": ((index-6) % 15 == 0) ? "seat cornar-seat": "seat"}
+            // className={item === "2" && ((index-6) % 15 == 0) ? "seat selected-seat cornar-seat": item === "2" ? "seat selected-seat": ((index-6) % 15 == 0) ? "seat cornar-seat": "seat"}
+            className={`seat ${item === "2" ? "selected-seat": ""} ${((index-6) % 15 == 0) ? "cornar-seat":""} ${item === "1" ? "desabled-seat": ""}`}
             onClick={() => toggleSeat(index)}
           >
+          {index}
           </div>
         ))}
       </div>
@@ -36,7 +38,7 @@ const SeatSelection = ({ max, totalSeats, onClick }) => {
       <h6 className='selected-items'>
         You can select maximum of {max} seats.
       </h6>
-      <button className="seats-btn" onClick={onClick}>Proceed To paymant</button>
+      <button className="seats-btn" onClick={() => onClick(seats)}>Proceed To paymant</button>
     </div>
   );
 };
