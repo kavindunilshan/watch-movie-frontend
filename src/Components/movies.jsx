@@ -6,6 +6,7 @@ import "../Styles/movies.css"
 import { MovieCard } from './movieCard';
 import { withRouter } from './cs';
 import { fetchData } from '../Services/httpService';
+import { toast } from 'react-toastify';
 
 class Movies extends Component {
     state = {AllMovies:[], movies:[], images:[], selectedVal: "", searchValue: ""};
