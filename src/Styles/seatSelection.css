@@ -8,7 +8,8 @@
     padding: 10px;
     width: 100%;
     color: gold;
-    font-family: 'Courgette', cursive;
+    font-family: 'Domine', serif;
+    font-size: 60%;
 }
 
 .seat-grid {
@@ -37,13 +38,22 @@
     background-color: #3aaab0;
 }
 
+.desabled-seat {
+    background-color: #586869;
+}
+
 .seat:hover {
     background-color: #90d5ee;
+}
+
+.desabled-seat:hover {
+    background-color: #586869;
 }
 
 .selected-seat:hover {
     background-color: #3aaab0;
 }
+
 
 .cornar-seat {
     margin-left: 10%;

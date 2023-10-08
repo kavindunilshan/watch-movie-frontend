@@ -15,7 +15,7 @@
 .tmb-heading {
     font-size: 140%;
     color: azure;
-    font-family: 'Courgette', cursive;
+    font-family: 'Domine', serif;
     text-align: center;
 }
 
@@ -32,13 +32,14 @@
 
 .tmb-th-description {
     margin-top: 1%;
-    font-size: 60%;
+    font-size: 100%;
+    margin-bottom: 0.5%;
 }
 
 .tmb-movie-data {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 
 .tmb-movie-picture {
@@ -50,7 +51,7 @@
     margin-top: 2%;
     font-size: 140%;
     color: azure;
-    font-family: 'Courgette', cursive;
+    font-family: 'Domine',serif;
     text-align: center;
 }
 
