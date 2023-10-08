@@ -4,10 +4,13 @@ import "../Styles/theaterMovie.css"
 import Dropdown from './dropdown';
 import NumberInput from './quantity';
 import SeatSelection from './seatSelection';
-import { fetchData } from '../Services/httpService';
+import { fetchData, updateData } from '../Services/httpService';
 import { withRouter } from './cs';
 import DateField from './dateField';
 import BasicSelect from './materialDropDown';
+import { auth } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { toast } from 'react-toastify';
 
 class TheaterMovie extends Component {
     state = {theater:{}, movie:{}, 
@@ -17,7 +20,19 @@ class TheaterMovie extends Component {
     date: "", seatData: {}
 }
 
-    async componentDidMount() { 
+    listen = onAuthStateChanged(auth, (user) => {
+        const {searchParams} = this.props;
+        const tid = searchParams.get("tid");
+        const mid = searchParams.get("mid");
+        const navigate = this.props.navigate;
+        if(!user) {
+            navigate(`/login/?tid=${tid}&mid=${mid}`);
+        }
+    })
+    
+
+    async componentDidMount() {
+        this.listen();
         const {searchParams} = this.props;
         const tid = searchParams.get("tid");
         const mid = searchParams.get("mid");
@@ -35,7 +50,12 @@ class TheaterMovie extends Component {
 
     handleTotal = (id, status) => {
         let {tickets} = this.state;
-        tickets[id] += 1;
+
+        if (status === "Add") {
+            tickets[id] += 1;
+        } else {
+            tickets[id] -= 1;
+        }
         this.setState({tickets});
     }
 
@@ -45,7 +65,7 @@ class TheaterMovie extends Component {
         const mid = searchParams.get("mid");
         const {showTime, date} = this.state;
         const seatData = await fetchData(`/seatData/${tid}/${mid}/${showTime}/${date}`);
-        this.setState({selectionModel:true});
+        this.setState({seatData, selectionModel:true});
     }
 
     handleDone = () => {
@@ -62,6 +82,20 @@ class TheaterMovie extends Component {
         this.setState({date: `${date.$y}s${date.$M + 1}s${date.$D}`});
     }
 
+    handleSeatBooking = async (seatsList) => {
+        const navigate = this.props.navigate;
+        const seats = seatsList.join("").replace(/2/g, "1");
+        const seatData = {...this.state.seatData}
+        seatData["seats"] = seats;
+        try{
+            const data = await updateData("/seatData", seatData);
+            toast("Payment Successful!");
+        } catch {
+            toast.error("Payment Unsuccessful!");
+        }
+        navigate("/");
+    }
+
     render() {
         const {theater, movie, shows, tickets, selectionModel, showTime, selectedShow, seatData} = this.state;
         return (
@@ -71,13 +105,13 @@ class TheaterMovie extends Component {
                     <div className={selectionModel ? "tmb tmb-active":"tmb"} onClick={this.handleDone}>
                         <div className='tmb-heading'>
                             <h1 className='tmb-th-name'>{theater.name}</h1>
-                            <h4 className='tmb-th-description'>{theater.description}</h4>
+                            <h4 className='tmb-th-description'>{theater.slogan}</h4>
                         </div>
 
                         <div className='tmb-movie-data'>
-                            <img className='tmb-movie-picture' src={Pic}></img>
+                            {theater.pictures && <img className='theater-picture' src={theater.pictures[1].name}></img>}
                         </div>
-                        <h1 className='tmb-mv-name'>Movie: {movie.title}</h1>
+                        <h1 className='tmb-mv-name'>Movie: {movie.name}</h1>
 
                         <div className='tmb-show-times'>
                             <Dropdown/>
@@ -120,7 +154,7 @@ class TheaterMovie extends Component {
 
                     { selectionModel &&
                         <div className='tmb-seat-selection'>
-                            <SeatSelection max={tickets.full + tickets.half} totalSeats={Object.keys(seatData).length == 0 ? 0: seatData.numSeats}/>
+                            <SeatSelection max={tickets.full + tickets.half} totalSeats={seatData == null ? 0: seatData.numSeats} seatData={seatData == null ? "0": seatData.seats} onClick={this.handleSeatBooking}/>
                         </div>
                     }
                 </div>

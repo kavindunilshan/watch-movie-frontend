@@ -17,12 +17,20 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         const navigate = this.props.navigate; 
+        const {searchParams} = this.props;
+        const tid = searchParams.get("tid");
+        const mid = searchParams.get("mid");
         e.preventDefault();
         const {username, password} = this.state.data;
         signInWithEmailAndPassword(auth, username, password)
         .then((userCredential) => {
             console.log(userCredential);
-            navigate("/")
+            if (tid == null || mid == null) {
+                navigate("/");
+            } else {
+                navigate(`/theater-movie/?tid=${tid}&mid=${mid}`);
+            }
+            
         })
         .catch((error) => {
             console.log(error);

@@ -1,3 +1,5 @@
+@import '~font-awesome/css/font-awesome.min.css';
+
 *,
 *::before,
 *::after {
@@ -58,7 +60,6 @@ body {
   font-size: 1.6rem;
   background-image: url(./Images/3418448.jpg);
   background-size: cover;
-  background-repeat: no-repeat;
   background-color: black;
   padding-top: 1%;
 }

@@ -8,6 +8,7 @@ import { AddressMap } from './map';
 import { withRouter } from './cs';
 import { MovieCard } from './movieCard';
 import { fetchData } from '../Services/httpService';
+import { toast } from 'react-toastify';
 
 class Theater extends Component {
     constructor(props) {
