@@ -8,23 +8,23 @@ import Theater from './Components/theater';
 import Theaters from './Components/theaters';
 import Movies from './Components/movies';
 import { Navigate, Route, Router, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import TheaterMovie from './Components/theaterMovie';
 import Register from './Components/register';
-import theater from './Components/theater';
 import NotFound from './Components/not-found';
 import Logout from './Components/logout';
 import Home from './Components/home';
 import AboutUs from './Components/about-us';
+import Footer from './Components/footer';
+import 'react-toastify/dist/ReactToastify.css'
+
 
 class App extends Component {
-  state = {}
-
-
-
   render() { 
       return (
       <React.Fragment>
         <NavBar/>
+        <ToastContainer/>
             <Routes>
               <Route path='/movies' element={<Movies/>}/>
               <Route path='/theaters' element={<Theaters/>}/>
