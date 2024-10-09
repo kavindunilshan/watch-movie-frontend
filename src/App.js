@@ -25,6 +25,7 @@ class App extends Component {
       <React.Fragment>
         <NavBar/>
         <ToastContainer/>
+        <div className='app-container'>
             <Routes>
               <Route path='/movies' element={<Movies/>}/>
               <Route path='/theaters' element={<Theaters/>}/>
@@ -40,6 +41,8 @@ class App extends Component {
               <Route path='/' exact element={<Home/>}/>
               <Route path='*' element={<Navigate to="/not-found" replace/>}/>
             </Routes>
+        </div>
+            <Footer/>
       </React.Fragment>
     );
   }
