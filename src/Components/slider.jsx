@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
 
 import { fetchData } from '../Services/httpService';
+import { toast } from 'react-toastify';
 
 function Slider() {
   const [images, setImages] = useState();
@@ -17,9 +18,8 @@ function Slider() {
       try {
         const data = await fetchData("/pictures");
         setImages(data);
-        console.log("working ", data);
       } catch {
-        console.log("Error has occured.");
+        toast.error("Error Fetching data");
       }
     }
 
