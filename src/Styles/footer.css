@@ -1,6 +1,26 @@
 .footer {
-    position: relative;
     height: 100px;
     width: 100%;
-    background-color: rgb(17, 20, 109);
+}
+
+.footer-tags {
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    margin: 0 auto;
+}
+
+.footer-end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    margin: 15px auto;
+}
+
+.footer-text {
+    color: white;
+    margin-left: 20px;
+    margin-top: 5px;
+    font-size: 120%;
 }
