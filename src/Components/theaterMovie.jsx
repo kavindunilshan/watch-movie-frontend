@@ -1,16 +1,15 @@
-import React, { Component } from 'react'
-import Pic from "../assets/Transformers.jpg"
+import React, {Component} from 'react'
 import "../Styles/theaterMovie.css"
 import Dropdown from './dropdown';
 import NumberInput from './quantity';
 import SeatSelection from './seatSelection';
-import { fetchData, updateData } from '../Services/httpService';
-import { withRouter } from './cs';
+import {fetchData, updateData} from '../Services/httpService';
+import {withRouter} from './cs';
 import DateField from './dateField';
 import BasicSelect from './materialDropDown';
-import { auth } from '../firebase';
-import { onAuthStateChanged } from 'firebase/auth';
-import { toast } from 'react-toastify';
+import {auth} from '../firebase';
+import {onAuthStateChanged} from 'firebase/auth';
+import {toast} from 'react-toastify';
 
 class TheaterMovie extends Component {
     state = {theater:{}, movie:{}, 

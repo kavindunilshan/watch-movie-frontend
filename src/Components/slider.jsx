@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React, {useEffect, useState} from 'react';
+import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
+import {Autoplay, EffectCoverflow, Navigation, Pagination} from 'swiper/modules';
 
-import { fetchData } from '../Services/httpService';
-import { toast } from 'react-toastify';
+import {fetchData} from '../Services/httpService';
+import {toast} from 'react-toastify';
 
 function Slider() {
   const [images, setImages] = useState();

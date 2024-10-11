@@ -1,14 +1,9 @@
-import React, { Component } from 'react'
-import Slider from '../Components/slider';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react'
 import "../Styles/theater.css"
-import  Pic from "../assets/Transformers.jpg"
-import IMDB from "../assets/imdb.png"
-import { AddressMap } from './map';
-import { withRouter } from './cs';
-import { MovieCard } from './movieCard';
-import { fetchData } from '../Services/httpService';
-import { toast } from 'react-toastify';
+import {AddressMap} from './map';
+import {withRouter} from './cs';
+import {MovieCard} from './movieCard';
+import {fetchData} from '../Services/httpService';
 
 class Theater extends Component {
     constructor(props) {

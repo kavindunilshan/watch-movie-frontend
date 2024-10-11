@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { useInView } from 'react-intersection-observer';
+import React from 'react'
+import {useInView} from 'react-intersection-observer';
 import "../Styles/slogan.css"
 
 const SloganText = ({text}) => {

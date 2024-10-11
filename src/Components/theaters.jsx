@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Dropdown from './dropdown';
-import  Pic from "../assets/Transformers.jpg"
 import TheaterCard from './theaterCard';
 import "../Styles/theaters.css"
-import { withRouter } from './cs';
-import { fetchData } from '../Services/httpService';
+import {withRouter} from './cs';
+import {fetchData} from '../Services/httpService';
 
 class Theaters extends Component {
     state = {AllTheaters:[], theaters:[], selectedVal: "", searchValue: ""};

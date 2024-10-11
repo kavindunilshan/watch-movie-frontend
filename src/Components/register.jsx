@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Input from './input';
 import '../Styles/register.css'
 import Logo from "../Images/logo.png"
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
-import { createData } from '../Services/httpService';
-import { withRouter } from './cs';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../firebase';
+import {createData} from '../Services/httpService';
+import {withRouter} from './cs';
 
 class Register extends Component {
     state = { data : {name: "", username: "", password1: "", password2: ""} , errors: {name: "", username: "", password: "", password2: ""} } 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import "../Styles/seatSelection.css";
 
 const SeatSelection = ({ max, seatData, onClick }) => {

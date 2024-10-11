@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import "../Styles/input.css"
 
 const Input = ({name, label, value, onChange, error, type}) => {

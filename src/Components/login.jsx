@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Input from './input';
 import '../Styles/login.css'
 import Logo from "../Images/logo.png"
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth} from "../../src/firebase"
-import { withRouter } from './cs';
+import {withRouter} from './cs';
 
 class Login extends Component {
     state = { data : {username: "", password: ""} , errors: {username: "", password: ""} }

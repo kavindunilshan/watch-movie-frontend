@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import "../Styles/home.css"
 import Slider from './slider';
 import SloganText from './Slogans';
-import { withRouter } from './cs';
+import {withRouter} from './cs';
 
 class Home extends Component {
     handleClick = () => {

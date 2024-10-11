@@ -5,10 +5,23 @@ import './index.css'
 import "./Styles/slider.css"
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'
+import { AuthProvider } from "@asgardeo/auth-react";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter><App/></BrowserRouter>
+    <BrowserRouter>
+        <AuthProvider
+            config={ {
+                signInRedirectURL: "http://localhost:3000",
+                signOutRedirectURL: "http://localhost:3000",
+                clientID: "7sZC7Fcd92FffmUW5lA6cXwwTA4a",
+                baseUrl: "https://api.asgardeo.io/t/spendwise",
+                scope: [ "openid","profile" ]
+            } }
+        >
+            <App/>
+        </AuthProvider>
+    </BrowserRouter>
   </React.StrictMode>,
 );
 
