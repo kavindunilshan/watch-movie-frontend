@@ -1,11 +1,9 @@
-import React, { Component } from 'react'
-import Slider from '../Components/slider';
-import { Link } from 'react-router-dom';
-import  Pic from "../assets/Transformers.jpg"
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom';
 import IMDB from "../assets/imdb.png"
 import "../Styles/movie.css"
-import { fetchData } from '../Services/httpService';
-import { withRouter } from './cs';
+import {fetchData} from '../Services/httpService';
+import {withRouter} from './cs';
 
 class Movie extends Component {
     state = {movie:[], casts:[], reviews:[]}

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import React from 'react'
+import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 
 export function withRouter(Child) {
     return ( props ) => {

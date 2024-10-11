@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import "../Styles/footer.css";
-import { FaHome, FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaRegCopyright } from 'react-icons/fa';
+import {FaFacebook, FaInstagram, FaLinkedin, FaRegCopyright, FaTwitter} from 'react-icons/fa';
 
 const Footer = () => {
     const theame = {backgroundColor: "none", color: "white"};

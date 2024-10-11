@@ -1,6 +1,6 @@
-import { signOut } from 'firebase/auth';
-import React, { Component } from 'react'
-import { auth } from '../firebase';
+import {signOut} from 'firebase/auth';
+import {Component} from 'react'
+import {auth} from '../firebase';
 
 
 class Logout extends Component {
