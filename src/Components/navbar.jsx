@@ -1,31 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {NavLink} from 'react-router-dom';
 import Logo from '../Images/logo.png';
 import '../Styles/navbar.css';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase';
-import { useAuthContext } from "@asgardeo/auth-react";
+import {useAuthContext} from "@asgardeo/auth-react";
 
 function NavBar() {
-    const [authUser, setAuthUser] = useState(null);
-
     const { state, signIn, signOut } = useAuthContext();
-
-
-    useEffect( () => {
-        const listen = onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setAuthUser(user);
-            } else {
-                setAuthUser(null);
-            }
-        });
-
-        return () => {
-            listen();
-        }
-    }, []
-    );
 
   return (
     <React.Fragment>
@@ -56,7 +36,7 @@ function NavBar() {
           </li>
         </ul>
       </nav>
-      {!authUser && 
+      {!state?.isAuthenticated &&
         <section className="nav-btns">
             <button className="nav-btn">
                 <div className="btn-link" aria-current="page" onClick={() => signIn()}>
@@ -66,12 +46,12 @@ function NavBar() {
         </section>
       }
 
-    {authUser && 
+    {state?.isAuthenticated &&
         <section className="nav-btns">
             <button className="nav-btn">
-            <Link className="btn-link" aria-current="page" to="/logout">
+            <div className="btn-link" aria-current="page" onClick={() => signOut()}>
                 LogOut
-            </Link>
+            </div>
             </button>
         </section>
       }
