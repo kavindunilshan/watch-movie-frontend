@@ -54,6 +54,8 @@ const initialFormData = {
     genre: '',
     dimension: '',
     status: '',
+    portrait: '',
+    landscape: '',
 };
 
 export default function AdminMovies() {
@@ -90,6 +92,8 @@ export default function AdminMovies() {
             genre: movie.genre,
             dimension: movie.dimension,
             status: movie.status,
+            portrait: movie.portrait,
+            landscape: movie.landscape
         });
     };
 
@@ -197,7 +201,7 @@ export default function AdminMovies() {
                 </Table>
             </TableContainer>
             <CustomizedDialogs
-                title={"Edit Movie"}
+                title={"Add Movie"}
                 open={open}
                 handleClose={handleClose}
                 handleSaveChanges={handleSaveChanges}

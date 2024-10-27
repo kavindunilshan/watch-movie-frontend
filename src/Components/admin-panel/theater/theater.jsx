@@ -15,6 +15,8 @@ function AdminTheater() {
         slogan: '',
         ratings: '',
         dimension: '',
+        portrait: '',
+        landscape: ''
     });
     const [locationData, setLocationData] = useState({
         district: '',
@@ -39,6 +41,8 @@ function AdminTheater() {
                     slogan: data.slogan,
                     ratings: data.ratings,
                     dimension: data.dimension,
+                    portrait: data.portrait,
+                    landscape: data.landscape
                 });
                 setLocationData({
                     district: data.location.district,

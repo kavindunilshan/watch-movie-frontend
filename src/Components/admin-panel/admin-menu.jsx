@@ -10,20 +10,26 @@ function AdminMenu({}) {
                 <ul className="admin-sidebar">
                     <li className="admin-sidebar-item">
                         <NavLink to="/admin/movie"
-                                 style={({ isActive }) => (isActive ? { color: "#333", backgroundColor: '#ffd700' } : {})}
+                                 style={({isActive}) => (isActive ? {color: "#333", backgroundColor: '#ffd700'} : {})}
                         >Movie
                         </NavLink>
                     </li>
                     <li className="admin-sidebar-item">
                         <NavLink to="/admin/theater"
-                                 style={({ isActive }) => (isActive ? { color: "#333", backgroundColor: '#ffd700' }  : {})}
-                                >Theater
+                                 style={({isActive}) => (isActive ? {color: "#333", backgroundColor: '#ffd700'} : {})}
+                        >Theater
                         </NavLink>
                     </li>
                     <li className="admin-sidebar-item">
                         <NavLink to="/admin/show"
-                            style={({ isActive }) => (isActive ? { color: "#333", backgroundColor: '#ffd700' }  : {})}
-                            >Show
+                                 style={({isActive}) => (isActive ? {color: "#333", backgroundColor: '#ffd700'} : {})}
+                        >Show
+                        </NavLink>
+                    </li>
+                    <li className="admin-sidebar-item">
+                        <NavLink to="/admin/hall"
+                                 style={({isActive}) => (isActive ? {color: "#333", backgroundColor: '#ffd700'} : {})}
+                        >Hall
                         </NavLink>
                     </li>
                 </ul>

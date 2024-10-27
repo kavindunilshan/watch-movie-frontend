@@ -182,6 +182,27 @@ export default function MovieTextFields({ formData, handleFormChange, errors }) 
             </div>
             <div>
                 <TextField
+                    label="Portrait Photo URL"
+                    name="portrait"
+                    value={formData.portrait}
+                    onChange={handleFormChange}
+                    helperText={errors.portrait || "Enter the portrait photo URL"}
+                    error={Boolean(errors.portrait)}
+                    FormHelperTextProps={{ sx: { fontSize: '1rem' } }}
+                    fullWidth
+                />
+                <TextField
+                    label="Landscape Photo URL"
+                    name="landscape"
+                    value={formData.landscape}
+                    onChange={handleFormChange}
+                    helperText={errors.landscape || "Enter the landscape photo URL"}
+                    error={Boolean(errors.landscape)}
+                    FormHelperTextProps={{ sx: { fontSize: '1rem' } }}
+                    fullWidth
+                    sx={{ marginTop: '1rem' }} // Optional: Add some spacing between fields
+                />
+                <TextField
                     id="outlined-select-status"
                     select
                     label="Status"

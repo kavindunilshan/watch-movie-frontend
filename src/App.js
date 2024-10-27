@@ -22,6 +22,7 @@ import AdminTheater from "./Components/admin-panel/theater/theater";
 import AdminShow from "./Components/admin-panel/show/show";
 import {withRouter} from "./Components/cs";
 import {AdminProvider} from "./Components/admin-panel/admin-context";
+import AdminHall from "./Components/admin-panel/hall/adminHall";
 
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
             <AdminProvider>
                 <Routes>
                     <Route path="/admin" element={<Admin />}>
+                        <Route path="hall" element={<AdminHall/>} />
                         <Route path="movie" element={<AdminMovie/>} />
                         <Route path="show" element={<AdminShow />} />
                         <Route path="theater" element={<AdminTheater/>} />

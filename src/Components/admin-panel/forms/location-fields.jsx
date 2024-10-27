@@ -31,6 +31,18 @@ export default function LocationTextFields({ locationData, handleLocationChange,
                     error={Boolean(locationErrors.city)}
                     FormHelperTextProps={{ sx: { fontSize: '1rem' } }}
                 />
+                <TextField
+                    label="Address"
+                    name="address"
+                    value={locationData.address}
+                    onChange={handleLocationChange}
+                    helperText={locationErrors.address || "Enter the address"}
+                    error={Boolean(locationErrors.address)}
+                    multiline
+                    rows={2}
+                    sx={{ width: '57ch' }}
+                    FormHelperTextProps={{ sx: { fontSize: '1rem' } }}
+                />
             </div>
             <div>
                 <TextField
@@ -55,18 +67,6 @@ export default function LocationTextFields({ locationData, handleLocationChange,
                 />
             </div>
             <div>
-                <TextField
-                    label="Address"
-                    name="address"
-                    value={locationData.address}
-                    onChange={handleLocationChange}
-                    helperText={locationErrors.address || "Enter the address"}
-                    error={Boolean(locationErrors.address)}
-                    multiline
-                    rows={2}
-                    sx={{ width: '57ch' }}
-                    FormHelperTextProps={{ sx: { fontSize: '1rem' } }}
-                />
             </div>
         </Box>
     );
