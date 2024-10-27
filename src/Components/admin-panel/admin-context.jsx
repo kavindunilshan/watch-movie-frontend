@@ -1,6 +1,9 @@
 import React, { createContext, useState } from 'react';
 
-export const AdminContext = createContext();
+export const AdminContext = createContext({
+    componentData: { title: "", slogan: "" },
+    setComponentData: () => {},
+});
 
 export const AdminProvider = ({ children }) => {
     const [componentData, setComponentData] = useState({title: "", slogan: ""});

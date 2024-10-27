@@ -1,6 +1,6 @@
-.settings-sidebar-container {
+.admin-sidebar-container {
     font-family: 'Open Sans', sans-serif;
-    color: #343a40;
+    color: #ffd700;
     padding-left: 20px;
     padding-right: 10px;
     border-right: 1px solid #dee2e6;
@@ -9,26 +9,28 @@
     flex-direction: column;
 }
 
-.settings-sidebar {
+.admin-sidebar {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.settings-sidebar-item {
+.admin-sidebar-item {
     margin: 10px 0;
 }
 
-.settings-sidebar-item a {
+.admin-sidebar-item a {
     text-decoration: none;
-    color: #333;
+    color: #ffd700;
     font-weight: 600;
     display: block;
-    padding: 10px 15px;
+    padding: 20px 15px;
     border-radius: 5px;
+    border-bottom: 1px solid #ffd700;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.settings-sidebar-item a:hover {
-    background-color: #f0f0f0;
+.admin-sidebar-item a:hover {
+    background-color: #ffd700;
+    color: #343a40;
 }

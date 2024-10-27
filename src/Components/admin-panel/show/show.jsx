@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from 'react';
-import {SettingsContext} from "../settings-context.jsx";
+import {AdminContext} from "../admin-context.jsx";
 
-function Movie(props) {
-    const { setComponentData } = useContext(SettingsContext);
+function AdminShow(props) {
+    const { setComponentData } = useContext(AdminContext);
 
     useEffect(() => {
         setComponentData({"title": "Show", "slogan": "Manage your Shows"});
@@ -12,4 +12,4 @@ function Movie(props) {
     );
 }
 
-export default Movie;
+export default AdminShow;

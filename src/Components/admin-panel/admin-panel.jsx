@@ -1,16 +1,16 @@
-import React, {useContext, useEffect} from 'react';
-import '/src/styles/admin/admin.css';
+import React, {useContext} from 'react';
+import '../../Styles/admin/admin.css';
 import {Outlet} from "react-router-dom";
 import {NavigateNext} from "@mui/icons-material";
-import {AdminContext} from "./settings-context";
+import {AdminContext} from "./admin-context";
 import HeaderWithSlogan from "./header-slogan";
-import AdminMenu from "./settings-menu";
+import AdminMenu from "./admin-menu";
 
 function Admin() {
 
     const { componentData } = useContext(AdminContext);
 
-    const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+    const [isAuthenticated, setIsAuthenticated] = React.useState(true);
 
     return (
         <>
@@ -21,7 +21,7 @@ function Admin() {
 
                     <div className={'admin-topics'}>
                         <HeaderWithSlogan title={'Admin'} slogan={'Manage your dashboard admin'}/>
-                        <NavigateNext style={{color: '#6c757d', margin: '0 20px 0 50px'}}/>
+                        <NavigateNext style={{color: '#ffd700', fontSize: '30px', margin: '0 20px 0 50px'}}/>
                         <HeaderWithSlogan
                             isSubTopic={true}
                             title={componentData.title}

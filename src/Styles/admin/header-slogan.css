@@ -1,25 +1,25 @@
-.settings-header {
+.admin-header {
     display: flex;
     font-family: 'Open Sans', sans-serif;
     flex-direction: column;
     justify-content: center;
 }
 
-.settings-header-title {
+.admin-header-title {
     margin: 5px 20px;
     font-weight: 700;
     font-size: 2.2em;
-    color: #343a40;
+    color: #ffd700;
 }
 
-.settings-header-slogan {
+.admin-header-slogan {
     margin: 0 0 20px 20px;
     font-weight: 400;
     font-size: 1em;
-    color: #6c757d;
+    color: #ffd700;
 }
 
-.settings-header-separator {
+.admin-header-separator {
     border: 0;
     margin: 0;
     border-top: 1px solid #dee2e6;

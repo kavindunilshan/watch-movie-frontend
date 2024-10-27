@@ -1,5 +1,5 @@
 import React from 'react';
-import '/src/Styles/admin/header-slogan.css';
+import '../../Styles/admin/header-slogan.css';
 
 function HeaderWithSlogan({title, slogan, isSubTopic, titleStyle}) {
     return (
