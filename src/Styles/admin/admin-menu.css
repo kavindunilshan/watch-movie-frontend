@@ -31,6 +31,5 @@
 }
 
 .admin-sidebar-item a:hover {
-    background-color: #ffd700;
-    color: #343a40;
+    background-color: rgba(255, 215, 0, 0.24);
 }
