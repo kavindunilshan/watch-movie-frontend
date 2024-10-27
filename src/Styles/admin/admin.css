@@ -1,0 +1,24 @@
+.admin {
+    margin-top: 20px;
+}
+
+.admin-sub-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.admin-topics {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.admin-left {
+    width: 15%;
+    height: 100%;
+}
+
+.admin-right {
+    width: 85%;
+    height: 100%;
+}
