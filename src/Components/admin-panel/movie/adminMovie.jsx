@@ -13,6 +13,7 @@ import { Edit } from "@mui/icons-material";
 import CustomizedDialogs from "../forms/add-transaction";
 import MovieTextFields from "../forms/form-fields";
 import {AdminContext} from "../admin-context";
+import {createData, fetchData} from "../../../Services/admin-services";
 
 // Styled components for table cells
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -42,7 +43,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 // Initial data structure for the movie form
 const initialFormData = {
     index: 0,
-    movieId: 0,
+    mid: 0,
     name: '',
     duration: '',
     actor: '',
@@ -71,16 +72,14 @@ export default function AdminMovies() {
     }, []);
 
     useEffect(() => {
-        // Fetch movies from API and set the state
-        // Example: fetchMovies().then(data => setMovies(data));
-        console.log("Fetching movies...");
+        fetchData('/movies').then(data => setMovies(data));
     }, []);
 
     const handleClickOpen = (index, movie) => {
         setOpen(true);
         setFormData({
             index: index,
-            movieId: movie.movieId,
+            mid: movie.mid,
             name: movie.name,
             duration: movie.duration,
             actor: movie.actor,
@@ -130,12 +129,26 @@ export default function AdminMovies() {
             return;
         }
 
-        // Update movie data
-        // Example: editMovie(formData.movieId, formData).then(updatedMovie => {
-        //     const newMovies = [...movies];
-        //     newMovies[formData.index] = updatedMovie;
-        //     setMovies(newMovies);
-        // });
+        const newMovie = { ...formData }
+        delete newMovie.index;
+
+        createData('/movies', newMovie).then(
+            (data) => {
+                console.log("Movie created successfully", data);
+            }
+        ).catch(
+            (error) => {
+                console.error("Failed to create movie", error);
+            }
+        );
+
+        if (formData.mid === 0) {
+            setMovies([...movies, formData]);
+        } else {
+            const updatedMovies = [...movies];
+            updatedMovies[formData.index] = formData;
+            setMovies(updatedMovies);
+        }
 
         setFormData(initialFormData);
         setErrors({});
