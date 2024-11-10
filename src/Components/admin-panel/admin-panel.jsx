@@ -1,16 +1,18 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import '../../Styles/admin/admin.css';
 import {Outlet} from "react-router-dom";
 import {NavigateNext} from "@mui/icons-material";
 import {AdminContext} from "./admin-context";
 import HeaderWithSlogan from "./header-slogan";
 import AdminMenu from "./admin-menu";
+import {useAuthContext} from "@asgardeo/auth-react";
 
 function Admin() {
 
     const { componentData } = useContext(AdminContext);
 
-    const [isAuthenticated, setIsAuthenticated] = React.useState(true);
+    const { state, signIn, signOut } = useAuthContext();
+    const [isAuthenticated, setIsAuthenticated] = React.useState(state?.isAuthenticated);
 
     return (
         <>

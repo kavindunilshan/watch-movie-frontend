@@ -13,6 +13,9 @@ import { Edit } from "@mui/icons-material";
 import CustomizedDialogs from "../forms/add-transaction";
 import { AdminContext } from "../admin-context";
 import HallTextFields from "../forms/hall-fields";
+import {useAuthContext} from "@asgardeo/auth-react";
+import axios from "axios";
+import {fetchData} from "../../../Services/admin-services";
 
 // Styled components for table cells
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -54,6 +57,10 @@ export default function AdminHall() {
     const [errors, setErrors] = useState({});
     const [halls, setHalls] = React.useState([]);
 
+    const { state, signIn, signOut } = useAuthContext();
+
+    const userId = state?.sub.replace(/-/g, "");
+
     const { setComponentData } = useContext(AdminContext);
 
     useEffect(() => {
@@ -63,7 +70,11 @@ export default function AdminHall() {
     useEffect(() => {
         // Fetch halls from API and set the state
         console.log("Fetching halls...");
-    }, []);
+
+        if (userId) {
+            fetchData(`/halls/${userId}`).then(data => setHalls(data));
+        }
+    }, [userId]);
 
     const handleClickOpen = (index, hall) => {
         setOpen(true);
@@ -94,7 +105,7 @@ export default function AdminHall() {
         }));
     };
 
-    const handleSaveChanges = () => {
+    const handleSaveChanges = async () => {
         let hasError = false;
         let newErrors = {};
 
@@ -117,12 +128,15 @@ export default function AdminHall() {
             return;
         }
 
-        // Update hall data
-        // Example: editHall(hallData.hallId, hallData).then(updatedHall => {
-        //     const newHalls = [...halls];
-        //     newHalls[hallData.index] = updatedHall;
-        //     setHalls(newHalls);
-        // });
+        try {
+            const response = await axios.put('http://localhost:8080/api/halls', {
+                ...hallData,
+                id: {tid: userId},
+            });
+            console.log("Here response", response.data);
+        } catch (error) {
+            console.error("Failed to update theater data", error);
+        }
 
         setHallData(initialHallData);
         setErrors({});

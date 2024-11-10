@@ -4,9 +4,16 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 import TheaterTextFields from "../forms/theater-fields";
+import {useAuthContext} from "@asgardeo/auth-react";
+import {fetchTheaterData} from "../../../Services/admin-services";
 
 function AdminTheater() {
     const { setComponentData } = useContext(AdminContext);
+    const { state, signIn, signOut } = useAuthContext();
+
+    const userId = state?.sub.replace(/-/g, "");
+
+    console.log("Here userId", userId);
 
     // State for theater and location data, errors, and edit mode
     const [theaterData, setTheaterData] = useState({
@@ -29,37 +36,40 @@ function AdminTheater() {
     const [locationErrors, setLocationErrors] = useState({});
     const [isEditMode, setIsEditMode] = useState(false);
 
-    // Fetch initial theater data from backend on component mount
     useEffect(() => {
-        const fetchTheaterData = async () => {
-            try {
-                const response = await axios.get('/api/theater'); // Mock backend API endpoint
-                const data = response.data;
-                setTheaterData({
-                    name: data.name,
-                    contactNumber: data.contactNumber,
-                    slogan: data.slogan,
-                    ratings: data.ratings,
-                    dimension: data.dimension,
-                    portrait: data.portrait,
-                    landscape: data.landscape
-                });
-                setLocationData({
-                    district: data.location.district,
-                    city: data.location.city,
-                    lat: data.location.lat,
-                    lang: data.location.lang,
-                    address: data.location.address,
-                });
-            } catch (error) {
-                console.error("Failed to fetch theater data", error);
-            }
-        };
-
-        // Set component data in context and fetch theater data
         setComponentData({ title: "Theater", slogan: "Manage your Theater data" });
-        fetchTheaterData();
     }, [setComponentData]);
+
+    useEffect(() => {
+        if(userId) {
+            fetchTheaterData(userId).then(data => {
+                if (data) {
+                    const theaterData = {
+                        name: data.name,
+                        contactNumber: data.contactNumber,
+                        slogan: data.slogan,
+                        ratings: data.ratings,
+                        dimension: data.dimension,
+                        portrait: data.portrait,
+                        landscape: data.landscape
+                    }
+
+                    const locationData = {
+                        district: data.location.district,
+                        city: data.location.city,
+                        lat: data.location.lat,
+                        lang: data.location.lang,
+                        address: data.location.address
+                    }
+
+                    setTheaterData(theaterData);
+                    setLocationData(locationData);
+                }
+            });
+        }
+    }, [userId]);
+
+
 
     // Handlers for data change
     const handleTheaterChange = (event) => {
@@ -84,16 +94,23 @@ function AdminTheater() {
     // Submit updated data to backend
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("Theater data", theaterData);
+
+        const location = {
+            tid: userId,
+            ...locationData
+        }
         try {
-            await axios.put('/api/theater', {
+            const response = await axios.put('http://localhost:8080/api/theaters', {
                 ...theaterData,
-                location: locationData,
+                tid: userId,
+                location: location,
             });
-            alert("Theater data updated successfully");
             setIsEditMode(false);
+
+            console.log("Here response", response.data);
         } catch (error) {
             console.error("Failed to update theater data", error);
-            alert("An error occurred while updating the theater data.");
         }
     };
 
@@ -120,6 +137,7 @@ function AdminTheater() {
                 locationData={locationData}
                 handleLocationChange={handleLocationChange}
                 locationErrors={locationErrors}
+                editable={isEditMode}
             />
 
             <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2, width: '100%' }}>
@@ -140,26 +158,16 @@ function AdminTheater() {
                         variant="contained"
                         onClick={handleEditToggle}
                         sx={{
+                            fontSize: '1.5rem',
                             backgroundColor: '#ffd700',
+                            padding: '5px 20px',
                             color: '#1e1e1e',
-                            '&:hover': { backgroundColor: '#e6be00' },
+                            '&:hover': { backgroundColor: 'rgba(230,190,0,0.92)' },
                         }}
                     >
                         Edit
                     </Button>
                 )}
-                <Button
-                    variant="outlined"
-                    onClick={() => setIsEditMode(false)}
-                    sx={{
-                        color: '#ffd700',
-                        borderColor: '#ffd700',
-                        '&:hover': { borderColor: '#e6be00', color: '#e6be00' },
-                        ml: 2,
-                    }}
-                >
-                    Change
-                </Button>
             </Box>
         </Box>
     );

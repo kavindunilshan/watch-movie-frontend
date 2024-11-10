@@ -5,6 +5,7 @@ import LocationTextFields from "./location-fields";
 
 export default function TheaterTextFields({
                                               theaterData,
+                                                isEditable,
                                               handleTheaterChange,
                                               theaterErrors,
                                               locationData,
