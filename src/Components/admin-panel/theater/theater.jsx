@@ -44,7 +44,6 @@ function AdminTheater() {
         if(userId) {
             fetchTheaterData(userId).then(data => {
                 if (data) {
-                    console.log("Here working", data);
                     const theaterData = {
                         name: data.name,
                         contactNumber: data.contactNumber,
@@ -138,6 +137,7 @@ function AdminTheater() {
                 locationData={locationData}
                 handleLocationChange={handleLocationChange}
                 locationErrors={locationErrors}
+                editable={isEditMode}
             />
 
             <Box sx={{ display: 'flex', justifyContent: 'space-around', mt: 2, width: '100%' }}>
