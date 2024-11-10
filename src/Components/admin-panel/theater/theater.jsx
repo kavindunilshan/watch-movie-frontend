@@ -158,26 +158,16 @@ function AdminTheater() {
                         variant="contained"
                         onClick={handleEditToggle}
                         sx={{
+                            fontSize: '1.5rem',
                             backgroundColor: '#ffd700',
+                            padding: '5px 20px',
                             color: '#1e1e1e',
-                            '&:hover': { backgroundColor: '#e6be00' },
+                            '&:hover': { backgroundColor: 'rgba(230,190,0,0.92)' },
                         }}
                     >
                         Edit
                     </Button>
                 )}
-                <Button
-                    variant="outlined"
-                    onClick={() => setIsEditMode(false)}
-                    sx={{
-                        color: '#ffd700',
-                        borderColor: '#ffd700',
-                        '&:hover': { borderColor: '#e6be00', color: '#e6be00' },
-                        ml: 2,
-                    }}
-                >
-                    Change
-                </Button>
             </Box>
         </Box>
     );
