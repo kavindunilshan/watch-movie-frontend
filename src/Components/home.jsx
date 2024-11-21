@@ -7,7 +7,7 @@ import {withRouter} from './cs';
 class Home extends Component {
     handleClick = () => {
         const navigate = this.props.navigate;
-        // navigate("/movies");
+        navigate("/movies");
     }
     render() { 
         return (

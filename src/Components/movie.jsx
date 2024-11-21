@@ -50,7 +50,7 @@ class Movie extends Component {
         return (
             <React.Fragment>
                 <div className='movie-page'>
-                    {movie.pictures && <img className='movie-picture' src={movie.pictures[1].name}></img>}
+                    {movie && <img className='movie-picture' src={movie.landscape}></img>}
                     <div className='movie-links'>
                         <Link to={`${movie.imdb}`} target='_blank'>
                             <button className="movie-btn">IMDB Profile</button>
@@ -101,7 +101,7 @@ class Movie extends Component {
 
                     <div className='movie-user-reviews'>
                         <h1 className='movie-topic'>User Reviews</h1>
-                        {reviews.map(review => {review &&
+                        {reviews && reviews.map(review => {review &&
                                 <div className='each-review-detail'>
                                     <h1 className='review-username'>{review.username}</h1>
                                     <h1 className='review-data'>{review.data}</h1>

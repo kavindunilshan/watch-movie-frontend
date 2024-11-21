@@ -13,6 +13,7 @@ class Movies extends Component {
     async componentDidMount() {
         try {
             const movies = await fetchData("/movies");
+            console.log("Here 2", movies);
             this.setState({movies, AllMovies:movies});
         } catch {
             console.log("Error has occured");
@@ -72,7 +73,7 @@ class Movies extends Component {
                         <div className='mv-cards-list'>
                             {this.state.movies && this.state.movies.map((movie, index) => 
                                 {
-                                   return <MovieCard key={index} id={movie.mid} image={movie.pictures[1].name} status={movie.status} name={movie.name} language={movie.language} dimension={movie.dimesion} genre={movie.genre} ratings={movie.rating} label="Watch" onClick={this.handleClick}/>
+                                   return <MovieCard key={index} id={movie.mid} image={movie.landscape} status={movie.status} name={movie.name} language={movie.language} dimension={movie.dimension} genre={movie.genre} ratings={movie.imdb} label="Watch" onClick={this.handleClick}/>
                                 })
                             }
                         </div>
