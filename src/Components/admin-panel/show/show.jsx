@@ -8,10 +8,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Tooltip, Button, MenuItem, Select, TextField } from "@mui/material";
-import { Edit } from "@mui/icons-material";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 import CustomizedDialogs from "../forms/add-transaction";
 import { AdminContext } from "../admin-context";
+import {fetchData, updateData} from "../../../Services/admin-services";
+import {useAuthContext} from "@asgardeo/auth-react";
 
 // Styled components for table cells
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -40,9 +41,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 // Initial data structure for the show form
 const initialFormData = {
-    index: 0,
-    showId: 0,
-    movieId: '',
+    tid: "1111111", // Static theater ID
+    mid: '',
     fullPrice: '',
     halfPrice: '',
     timeSlot: '',
@@ -54,6 +54,9 @@ export default function AdminShow() {
     const [errors, setErrors] = useState({});
     const [shows, setShows] = useState([]);
     const [movies, setMovies] = useState([]);
+    const { state} = useAuthContext();
+
+    const userId = state?.sub.replace(/-/g, "");
 
     const { setComponentData } = useContext(AdminContext);
 
@@ -62,36 +65,25 @@ export default function AdminShow() {
     }, []);
 
     useEffect(() => {
-        // Fetch shows from API and set the state
-        // Example: fetchShows().then(data => setShows(data));
-        console.log("Fetching shows...");
+        fetchData("/movies").then(data => {
+            setMovies(data);
+            console.log("Movies data:", data);
+        });
 
-        // Fetch movies list for the dropdown
-        fetchMovies().then(data => setMovies(data));
+        fetchData("/theaterMovies").then(data => {
+            setShows(data);
+            console.log("Shows data:", data);
+        });
     }, []);
 
-    const fetchMovies = async () => {
-        // Dummy API request to fetch movies
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve([
-                    { movieId: 1, name: 'Inception' },
-                    { movieId: 2, name: 'Interstellar' },
-                    { movieId: 3, name: 'Tenet' },
-                ]);
-            }, 1000);
-        });
-    };
-
-    const handleClickOpen = (index, show) => {
+    const handleClickOpen = (show) => {
         setOpen(true);
         setFormData({
-            index: index,
-            showId: show.showId,
-            movieId: show.movieId,
-            fullPrice: show.fullPrice,
-            halfPrice: show.halfPrice,
-            timeSlot: show.timeSlot,
+            tid: userId,
+            mid: show?.id.mid || '',
+            fullPrice: show?.fullPrice || '',
+            halfPrice: show?.halfPrice || '',
+            timeSlot: show?.id.timeSlot || '',
         });
     };
 
@@ -118,6 +110,10 @@ export default function AdminShow() {
         let newErrors = {};
 
         // Validate required fields
+        if (!formData.mid) {
+            hasError = true;
+            newErrors.mid = "Movie selection is required";
+        }
         if (!formData.fullPrice) {
             hasError = true;
             newErrors.fullPrice = "Full price is required";
@@ -132,7 +128,27 @@ export default function AdminShow() {
             return;
         }
 
-        // Update show data
+        // Save changes logic (API call can be added here)
+        console.log("Saving formData:", formData);
+
+        const newShow = {
+            id : {
+                tid: userId,
+                mid: formData.mid,
+                timeSlot: formData.timeSlot
+            },
+            fullPrice: formData.fullPrice,
+            halfPrice: formData.halfPrice,
+        }
+
+        updateData("/theaterMovies", newShow).then(() => {
+            fetchData("/theaterMovies").then(data => {
+                setShows(data);
+                console.log("Shows data:", data);
+            });
+
+        });
+
         setFormData(initialFormData);
         setErrors({});
         setOpen(false);
@@ -142,7 +158,7 @@ export default function AdminShow() {
         <div className="show-component" style={{ width: '95%', marginLeft: '3%' }}>
             <Button
                 variant="contained"
-                onClick={() => setOpen(true)}
+                onClick={() => handleClickOpen()}
                 sx={{
                     backgroundColor: '#ffd700',
                     color: 'black',
@@ -156,14 +172,13 @@ export default function AdminShow() {
 
             <TableContainer component={Paper} style={{ marginTop: '4%', marginBottom: "15%" }}>
                 <Table sx={{ minWidth: 200 }} aria-label="show table">
-                    {shows.length !== 0 && (
+                    {shows && shows.length !== 0 && (
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell align="left">Movie</StyledTableCell>
                                 <StyledTableCell align="left">Full Price</StyledTableCell>
                                 <StyledTableCell align="left">Half Price</StyledTableCell>
                                 <StyledTableCell align="left">Time Slot</StyledTableCell>
-                                <StyledTableCell align="center">Actions</StyledTableCell>
                             </TableRow>
                         </TableHead>
                     )}
@@ -171,16 +186,11 @@ export default function AdminShow() {
                         {shows.map((show, index) => (
                             <StyledTableRow key={index}>
                                 <StyledTableCell align="left">
-                                    {movies.find(movie => movie.movieId === show.movieId)?.name || 'Unknown'}
+                                    {movies.find(movie => movie.mid === show.id.mid)?.name || 'Unknown'}
                                 </StyledTableCell>
                                 <StyledTableCell align="left">{show.fullPrice}</StyledTableCell>
                                 <StyledTableCell align="left">{show.halfPrice}</StyledTableCell>
-                                <StyledTableCell align="left">{show.timeSlot}</StyledTableCell>
-                                <StyledTableCell align="center">
-                                    <Tooltip title="Edit" placement="left">
-                                        <Edit onClick={() => handleClickOpen(index, show)} />
-                                    </Tooltip>
-                                </StyledTableCell>
+                                <StyledTableCell align="left">{show.id.timeSlot}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
@@ -195,13 +205,14 @@ export default function AdminShow() {
             >
                 <Select
                     label="Movie"
-                    name="movieId"
-                    value={formData.movieId}
+                    name="mid"
+                    value={formData.mid}
                     onChange={handleFormChange}
+                    error={Boolean(errors.mid)}
                     sx={{ width: '100%', mb: 2 }}
                 >
                     {movies.map((movie) => (
-                        <MenuItem key={movie.movieId} value={movie.movieId}>
+                        <MenuItem key={movie.mid} value={movie.mid}>
                             {movie.name}
                         </MenuItem>
                     ))}

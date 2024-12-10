@@ -12,7 +12,7 @@ class Theater extends Component {
         this.targetRef2 = React.createRef();
   }
 
-    state = {theater:{}, location:[], reviews:[], movies:[], shows:[], showDetails:false, showLocation:false};
+    state = {theater:{}, location:[], reviews:[], movies:[], shows:[], showDetails:true, showLocation:true};
 
     getMovies = (movies) => {
         const MovieSet = new Set();
@@ -31,18 +31,19 @@ class Theater extends Component {
             const theater = await fetchData(`/theaters/${tid}`);
             const shows = await fetchData(`/theaterMovies/${tid}`);
             const filterShows = this.getMovies(shows).join(",");
+
+            if (filterShows.length === 0) {
+                this.setState({theater, shows});
+                return;
+            }
             const movies = await fetchData(`/movies/list?items=${filterShows}`);
             this.setState({theater, movies, shows});
         } catch(e) {
-            console.log("Error has occured", e);
+            console.log("Error has occurred", e);
         }
      }
     
     handleDetails = () => {
-        const showDetails = !this.state.showDetails;
-        this.setState({showDetails, showLocation:false});
-
-        if(showDetails)
             this.targetRef2.current.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
@@ -51,10 +52,6 @@ class Theater extends Component {
     }
 
     handleLocation = () => {
-        const showLocation = !this.state.showLocation;
-        this.setState({showLocation, showDetails:false});
-
-        if (showLocation)
             this.targetRef1.current.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
@@ -76,7 +73,7 @@ class Theater extends Component {
                 {
                     theater && 
                 <div className='theater-page'>
-                    {theater.pictures && <img className='theater-picture' src={theater.pictures[1].name}></img>}
+                    {theater.pictures && <img className='theater-picture' src={theater.landscape}></img>}
                     <div className='theater-links'>
                         <button className="theater-btn theater-details-btn" onClick={this.handleDetails}>Theater Details</button>
                         <button className="theater-btn theater-location-btn" onClick={this.handleLocation}>Theater Location</button>
@@ -112,7 +109,7 @@ class Theater extends Component {
                         <h1 className='theater-topic'>PREMIERING NOW</h1>
                         <div className='theater-movie-cards-list'>
                         {movies && movies.map((movie, index) => {
-                            return <MovieCard key={index} id={movie.mid} image={movie.pictures[1].name} status={movie.status} name={movie.name} language={movie.language} dimension={movie.dimesion} genre={movie.genre} ratings={movie.rating} label="Book" onClick={this.handleClick}/>
+                            return <MovieCard key={index} id={movie.mid} image={movie.landscape} status={movie.status} name={movie.name} language={movie.language} dimension={movie.dimesion} genre={movie.genre} ratings={movie.rating} label="Book" onClick={this.handleClick}/>
                         })}
                         </div>
                     </div>
@@ -128,11 +125,14 @@ class Theater extends Component {
 
                     <div className='theater-details'>
                         <h1 className='theater-topic'>User Reviews on {theater.name}</h1>
-                        {reviews.map(review => {review &&
+                        {reviews.map(review => {
+                            return (
+                                review &&
                                 <div className='each-review-detail'>
                                     <h1 className='review-username'>{review.username}</h1>
                                     <h1 className='review-data'>{review.data}</h1>
                                 </div>
+                            )
                         })}
                     </div>
                 </div>
