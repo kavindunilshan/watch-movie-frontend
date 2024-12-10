@@ -17,7 +17,7 @@ function Admin() {
     return (
         <>
             {
-                !isAuthenticated &&
+                isAuthenticated &&
                 <div className={'admin'}>
 
 
