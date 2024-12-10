@@ -25,6 +25,8 @@
 }
 
 .th-search {
+    display: flex;
+    flex-direction: row;
     margin-left: 45%;
 }
 
@@ -47,5 +49,4 @@
     border-radius: 20px;
     outline: none;
     border: 2px solid gold;
-    
 }

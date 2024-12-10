@@ -7,6 +7,8 @@ import {useAuthContext} from "@asgardeo/auth-react";
 function NavBar() {
     const { state, signIn, signOut } = useAuthContext();
 
+    console.log(state);
+
   return (
     <React.Fragment>
       <div className="nav-logo">

@@ -42,7 +42,7 @@ class Movie extends Component {
 
     handleClick = () => {
         const navigate = this.props.navigate;
-        navigate("/theaters")
+        // navigate("/theaters")
     }
 
     render() { 
