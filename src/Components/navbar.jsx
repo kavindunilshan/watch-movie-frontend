@@ -1,13 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import Logo from '../Images/logo.png';
 import '../Styles/navbar.css';
 import {useAuthContext} from "@asgardeo/auth-react";
 
 function NavBar() {
-    const { state, signIn, signOut } = useAuthContext();
+    const { state, signIn, signOut, getIDToken, getBasicUserInfo, getDecodedIDToken } = useAuthContext();
 
-    console.log(state);
+    useEffect(() => {
+        async function fetchData() {
+            const basicUserInfo = await getBasicUserInfo();
+            const idToken = await getIDToken();
+            const decodedIDToken = await getDecodedIDToken();
+
+            console.log("Basic User Info: ", basicUserInfo);
+            console.log("ID Token: ", idToken);
+            console.log("Decoded ID Token: ", decodedIDToken);
+        }
+
+        if (state?.isAuthenticated) {
+            fetchData();
+        }
+    }, [state]);
+
 
   return (
     <React.Fragment>

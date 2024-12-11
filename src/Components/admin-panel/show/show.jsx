@@ -46,6 +46,7 @@ const initialFormData = {
     fullPrice: '',
     halfPrice: '',
     timeSlot: '',
+    hid: '',
 };
 
 export default function AdminShow() {
@@ -84,6 +85,7 @@ export default function AdminShow() {
             fullPrice: show?.fullPrice || '',
             halfPrice: show?.halfPrice || '',
             timeSlot: show?.id.timeSlot || '',
+            hid: show?.hid || '',
         });
     };
 
@@ -139,6 +141,7 @@ export default function AdminShow() {
             },
             fullPrice: formData.fullPrice,
             halfPrice: formData.halfPrice,
+            hid: formData.hid
         }
 
         updateData("/theaterMovies", newShow).then(() => {
@@ -179,6 +182,7 @@ export default function AdminShow() {
                                 <StyledTableCell align="left">Full Price</StyledTableCell>
                                 <StyledTableCell align="left">Half Price</StyledTableCell>
                                 <StyledTableCell align="left">Time Slot</StyledTableCell>
+                                <StyledTableCell align="left">Hall Id</StyledTableCell>
                             </TableRow>
                         </TableHead>
                     )}
@@ -191,6 +195,7 @@ export default function AdminShow() {
                                 <StyledTableCell align="left">{show.fullPrice}</StyledTableCell>
                                 <StyledTableCell align="left">{show.halfPrice}</StyledTableCell>
                                 <StyledTableCell align="left">{show.id.timeSlot}</StyledTableCell>
+                                <StyledTableCell align="left">{show.hid}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
@@ -242,6 +247,14 @@ export default function AdminShow() {
                     onChange={handleFormChange}
                     error={Boolean(errors.timeSlot)}
                     helperText={errors.timeSlot || "Enter time slot (e.g., 10:00 AM)"}
+                    fullWidth
+                    sx={{ mb: 2 }}
+                />
+                <TextField
+                    label="Hall Id"
+                    name="hid"
+                    value={formData.hid}
+                    onChange={handleFormChange}
                     fullWidth
                     sx={{ mb: 2 }}
                 />
