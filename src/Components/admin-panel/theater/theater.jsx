@@ -9,7 +9,7 @@ import {fetchTheaterData} from "../../../Services/admin-services";
 
 function AdminTheater() {
     const { setComponentData } = useContext(AdminContext);
-    const { state, signIn, signOut } = useAuthContext();
+    const { state } = useAuthContext();
 
     const userId = state?.sub.replace(/-/g, "");
 
@@ -65,6 +65,9 @@ function AdminTheater() {
                     setTheaterData(theaterData);
                     setLocationData(locationData);
                 }
+                console.log("Theater data", data);
+            }).catch((error) => {
+                console.error("Failed to fetch theater data", error);
             });
         }
     }, [userId]);

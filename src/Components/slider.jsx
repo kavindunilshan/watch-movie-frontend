@@ -16,8 +16,16 @@ function Slider() {
   useEffect(()=>{
     const fetchImages = async () => {
       try {
-        const data = await fetchData("/pictures");
-        setImages(data);
+        const data = await fetchData("/movies");
+
+        let pictures = data.map( (image) => {return image.portrait;});
+
+        pictures = [...pictures, ...pictures]
+
+        console.log(data);
+
+        setImages(pictures);
+
       } catch {
         toast.error("Error Fetching data");
       }
@@ -60,11 +68,9 @@ function Slider() {
       >
 
         {images && images.map((image, index) => {
-          if(image.id.pid === 1) {
             return  <SwiperSlide key={index}>
-                      <img src={image.name} alt="slide_image" />
+                      <img src={image} alt="slide_image" />
                     </SwiperSlide>
-          }
         })}
         
 

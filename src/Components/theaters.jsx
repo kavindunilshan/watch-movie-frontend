@@ -4,6 +4,7 @@ import TheaterCard from './theaterCard';
 import "../Styles/theaters.css"
 import {withRouter} from './cs';
 import {fetchData} from '../Services/httpService';
+import {Search} from "@mui/icons-material";
 
 class Theaters extends Component {
     state = {AllTheaters:[], theaters:[], selectedVal: "", searchValue: ""};
@@ -42,8 +43,20 @@ class Theaters extends Component {
 
     handleChange = ({currentTarget: input}) => {
         const searchValue = input.value;
+        const theaters = this.state.AllTheaters;
+
+        if (searchValue) {
+            const filteredTheaters = theaters.filter(theater => {
+                return theater.name.toLowerCase().includes(searchValue.toLowerCase());
+            });
+            this.setState({theaters: filteredTheaters});
+        } else {
+            this.setState({theaters});
+        }
+
         this.setState({searchValue});
     }
+
 
     handleClick = (id) => {
         const navigate = this.props.navigate;
@@ -57,7 +70,11 @@ class Theaters extends Component {
                 <div className='th-page'>
                     <div className='th-left'>
                         <div className='th-dd'>
-                            <Dropdown items={this.districts} onSelect={this.handleLanguageSelect} label="Select District"/>
+                            <Dropdown
+                                items={this.districts}
+                                onSelect={this.handleLanguageSelect}
+                                label="Select District"
+                            />
                         </div>
                     </div>
 
@@ -67,7 +84,18 @@ class Theaters extends Component {
                         </div>
                         <div className='theater-cards-list'>
                             {theaters && theaters.map((theater, index) => {
-                                return <TheaterCard key={index} id={theater.tid} image={theater.pictures[0].name} name={theater.name} district={theater.location.district} description={theater.slogan} city={theater.location.city} dimension={theater.dimension} ratings={theater.ratings} label="Visit" onClick={this.handleClick}/>
+                                return <TheaterCard
+                                            key={index}
+                                            id={theater.tid}
+                                            image={theater.portrait}
+                                            name={theater.name}
+                                            district={theater.location.district}
+                                            description={theater.slogan}
+                                            city={theater.location.city}
+                                            dimension={theater.dimension}
+                                            ratings={theater.ratings}
+                                            label="Visit"
+                                            onClick={this.handleClick}/>
                             })}
                         </div>
                     </div>

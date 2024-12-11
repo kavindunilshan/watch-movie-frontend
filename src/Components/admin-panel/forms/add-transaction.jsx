@@ -35,7 +35,7 @@ export default function CustomizedDialogs({title, open, handleClose, handleSaveC
                         m: 0,
                         p: 2,
                         textAlign: 'center',
-                        backgroundColor: '#320440',
+                        backgroundColor: '#705d02',
                         color: 'white'
                 }} id="customized-dialog-title">
                     {title}
@@ -52,16 +52,20 @@ export default function CustomizedDialogs({title, open, handleClose, handleSaveC
                 >
                     <CloseIcon />
                 </IconButton>
-                <DialogContent dividers>
+                <DialogContent
+                    sx={{
+                        backgroundColor: 'rgb(248,255,239)',
+                    }}
+                    dividers>
                     {children}
                 </DialogContent>
                 <DialogActions
                 sx={{
-                    backgroundColor: '#320440',
+                    backgroundColor: '#705d02',
                     color: 'white'
                 }}>
                     <Button autoFocus onClick={handleSaveChanges} sx={{
-                        backgroundColor: '#320440',
+                        backgroundColor: '#705d02',
                         color: 'white',
                         border: '1px solid white',
                     }}>
