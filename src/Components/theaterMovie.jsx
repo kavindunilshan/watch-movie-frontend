@@ -53,7 +53,37 @@ class TheaterMovie extends Component {
         const tid = searchParams.get("tid");
         const mid = searchParams.get("mid");
         const {showTime, date} = this.state;
-        const seatData = await fetchData(`/seatData/${tid}/${mid}/${showTime}/${date}`);
+
+        const show = this.state.shows.find(show => show.id.timeSlot == showTime);
+        console.log("selected Show data", show);
+
+        let seatData = await fetchData(`/seatData/${tid}/${mid}/${showTime}/${date}`);
+        console.log("Seat data maha huttak meka", seatData, !seatData?.id.tid);
+        if (!seatData?.id.tid) {
+            const hallData = await fetchData(`/halls/${tid}/${show.hid}`);
+            console.log("Hukana hall data", hallData);
+            const numSeats = hallData.seats;
+            const seats = "0".repeat(numSeats);
+
+            const newSeatData = {
+                id: {
+                    tid: tid,
+                    mid: mid,
+                    timeSlot: showTime,
+                    date: date,
+                },
+                numSeats: numSeats,
+                seats: seats,
+                hid: show.hid,
+            }
+
+            console.log("New seat data ammata hukanna", newSeatData);
+
+             seatData = await updateData("/seatData", newSeatData);
+
+        }
+
+        console.log(seatData);
         this.setState({seatData, selectionModel:true});
     }
 
@@ -76,6 +106,8 @@ class TheaterMovie extends Component {
         const seats = seatsList.join("").replace(/2/g, "1");
         const seatData = {...this.state.seatData}
         seatData["seats"] = seats;
+
+        console.log("Seat data is done", seatData);
         try{
             const data = await updateData("/seatData", seatData);
             toast("Payment Successful!");
@@ -129,7 +161,7 @@ class TheaterMovie extends Component {
                             <div className='tmb-ticket-price'>Half Ticket
                                 Price: {selectedShow == null ? "" : shows[selectedShow]["halfPrice"]}</div>
                         </div>
-                        
+
                     </div>
 
                     {!selectionModel &&
