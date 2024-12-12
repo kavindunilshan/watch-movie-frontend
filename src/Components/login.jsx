@@ -24,7 +24,7 @@ class Login extends Component {
         const {username, password} = this.state.data;
         signInWithEmailAndPassword(auth, username, password)
         .then((userCredential) => {
-            console.log(userCredential);
+            
             if (tid == null || mid == null) {
                 navigate("/");
             } else {
@@ -33,7 +33,7 @@ class Login extends Component {
             
         })
         .catch((error) => {
-            console.log(error);
+            
         });
         
     }

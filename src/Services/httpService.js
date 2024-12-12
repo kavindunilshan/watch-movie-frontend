@@ -7,7 +7,6 @@ const apiEndPoint = 'http://localhost:8080/api';
 export const fetchData = async (path) => {
   try {
     const response = await axios.get(`${apiEndPoint}${path}`);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     toast.error(`${error.response.data.status} ${error.response.data.error}`);

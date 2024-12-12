@@ -69,7 +69,7 @@ export default function AdminHall() {
 
     useEffect(() => {
         // Fetch halls from API and set the state
-        console.log("Fetching halls...");
+        
 
         if (userId) {
             fetchData(`/halls/${userId}`).then(data => setHalls(data));
@@ -133,7 +133,7 @@ export default function AdminHall() {
                 ...hallData,
                 id: {tid: userId},
             });
-            console.log("Here response", response.data);
+            
         } catch (error) {
             console.error("Failed to update theater data", error);
         }

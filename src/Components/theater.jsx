@@ -19,7 +19,7 @@ class Theater extends Component {
         movies.forEach(element => {
             MovieSet.add(element.id.mid);
         });
-        console.log(Array.from(MovieSet));
+        
         return [...MovieSet];
     }
 
@@ -39,7 +39,7 @@ class Theater extends Component {
             const movies = await fetchData(`/movies/list?items=${filterShows}`);
             this.setState({theater, movies, shows});
         } catch(e) {
-            console.log("Error has occurred", e);
+            
         }
      }
     

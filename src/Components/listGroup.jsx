@@ -3,7 +3,7 @@ import "../Styles/listGroup.css"
 
 const ListGroup = (props) => {
     const {items, selectedItem, onItemSelect} = props;
-    console.log(props);
+    
     return (
         <React.Fragment>
             <ul className="list-group">

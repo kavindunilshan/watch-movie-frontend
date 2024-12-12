@@ -68,12 +68,12 @@ export default function AdminShow() {
     useEffect(() => {
         fetchData("/movies").then(data => {
             setMovies(data);
-            console.log("Movies data:", data);
+            
         });
 
         fetchData("/theaterMovies").then(data => {
             setShows(data);
-            console.log("Shows data:", data);
+            
         });
     }, []);
 
@@ -131,7 +131,7 @@ export default function AdminShow() {
         }
 
         // Save changes logic (API call can be added here)
-        console.log("Saving formData:", formData);
+        
 
         const newShow = {
             id : {
@@ -147,7 +147,7 @@ export default function AdminShow() {
         updateData("/theaterMovies", newShow).then(() => {
             fetchData("/theaterMovies").then(data => {
                 setShows(data);
-                console.log("Shows data:", data);
+                
             });
 
         });

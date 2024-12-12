@@ -33,7 +33,7 @@ class TheaterMovie extends Component {
             this.setState({theater, movie, shows});
 
         } catch(e) {
-            console.log("Error has occured", e);
+            
         }
      }
 
@@ -55,13 +55,13 @@ class TheaterMovie extends Component {
         const {showTime, date} = this.state;
 
         const show = this.state.shows.find(show => show.id.timeSlot == showTime);
-        console.log("selected Show data", show);
+        
 
         let seatData = await fetchData(`/seatData/${tid}/${mid}/${showTime}/${date}`);
-        console.log("Seat data maha huttak meka", seatData, !seatData?.id.tid);
+        
         if (!seatData?.id.tid) {
             const hallData = await fetchData(`/halls/${tid}/${show.hid}`);
-            console.log("Hukana hall data", hallData);
+            
             const numSeats = hallData.seats;
             const seats = "0".repeat(numSeats);
 
@@ -77,13 +77,13 @@ class TheaterMovie extends Component {
                 hid: show.hid,
             }
 
-            console.log("New seat data ammata hukanna", newSeatData);
+            
 
              seatData = await updateData("/seatData", newSeatData);
 
         }
 
-        console.log(seatData);
+        
         this.setState({seatData, selectionModel:true});
     }
 
@@ -107,7 +107,7 @@ class TheaterMovie extends Component {
         const seatData = {...this.state.seatData}
         seatData["seats"] = seats;
 
-        console.log("Seat data is done", seatData);
+        
         try{
             const data = await updateData("/seatData", seatData);
             toast("Payment Successful!");

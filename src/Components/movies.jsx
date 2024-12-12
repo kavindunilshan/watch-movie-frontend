@@ -13,10 +13,10 @@ class Movies extends Component {
     async componentDidMount() {
         try {
             const movies = await fetchData("/movies");
-            console.log("Here 2", movies);
+            
             this.setState({movies, AllMovies:movies});
         } catch {
-            console.log("Error has occured");
+            
         }
     }
 

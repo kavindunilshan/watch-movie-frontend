@@ -5,23 +5,26 @@ import '../Styles/navbar.css';
 import {useAuthContext} from "@asgardeo/auth-react";
 
 function NavBar() {
-    const { state, signIn, signOut, getIDToken, getBasicUserInfo, getDecodedIDToken } = useAuthContext();
+    const { state, signIn, signOut, getBasicUserInfo } = useAuthContext();
 
     useEffect(() => {
         async function fetchData() {
-            const basicUserInfo = await getBasicUserInfo();
-            const idToken = await getIDToken();
-            const decodedIDToken = await getDecodedIDToken();
-
-            console.log("Basic User Info: ", basicUserInfo);
-            console.log("ID Token: ", idToken);
-            console.log("Decoded ID Token: ", decodedIDToken);
+            const userInfo = await getBasicUserInfo();
+            
         }
 
         if (state?.isAuthenticated) {
             fetchData();
         }
     }, [state]);
+
+    const handleSignIn = async () => {
+        signIn().then(
+            (response) => {
+                
+            }
+        );
+    }
 
 
   return (
@@ -56,7 +59,7 @@ function NavBar() {
       {!state?.isAuthenticated &&
         <section className="nav-btns">
             <button className="nav-btn">
-                <div className="btn-link" aria-current="page" onClick={() => signIn()}>
+                <div className="btn-link" aria-current="page" onClick={() => handleSignIn()}>
                     Login
                 </div>
             </button>
