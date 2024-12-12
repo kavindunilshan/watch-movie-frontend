@@ -6,9 +6,9 @@ import {auth} from '../firebase';
 class Logout extends Component {
     async componentDidMount() {
         signOut(auth).then(() => {
-            console.log("Log out");
+            
         }).catch((error) => {
-            console.log(error);
+            
         });
         window.location = "/";
     }

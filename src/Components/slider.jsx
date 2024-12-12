@@ -22,7 +22,7 @@ function Slider() {
 
         pictures = [...pictures, ...pictures]
 
-        console.log(data);
+        
 
         setImages(pictures);
 

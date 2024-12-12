@@ -20,9 +20,9 @@ class Theaters extends Component {
         try {
             const theaters = await fetchData("/theaters");
             this.setState({theaters: theaters, AllTheaters: theaters});
-            console.log(this.state.theaters);
+            
         } catch {
-            console.log("Error has occured");
+            
         }
     }
 

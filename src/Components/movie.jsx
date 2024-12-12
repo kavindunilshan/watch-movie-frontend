@@ -27,7 +27,7 @@ class Movie extends Component {
     async componentDidMount() {
         const {searchParams} = this.props;
         const mid = searchParams.get("mid");
-        console.log("working", mid);
+        
 
         try {
             const movies = await fetchData("/movies");
@@ -36,7 +36,7 @@ class Movie extends Component {
             movie.trailer = trailer;
             this.setState({movie});
         } catch {
-            console.log("Error has occured");
+            
         }
     }
 

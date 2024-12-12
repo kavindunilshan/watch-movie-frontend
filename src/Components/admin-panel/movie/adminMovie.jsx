@@ -134,7 +134,7 @@ export default function AdminMovies() {
 
         createData('/movies', newMovie).then(
             (data) => {
-                console.log("Movie created successfully", data);
+                
             }
         ).catch(
             (error) => {

@@ -21,7 +21,7 @@ class Register extends Component {
         const {username, password1} = this.state.data;
         createUserWithEmailAndPassword(auth, username, password1)
         .then(async (userCredential) => {
-            console.log(userCredential);
+            
 
             var user = {id: userCredential.user.uid, username:userCredential.user.email}
 
@@ -32,7 +32,7 @@ class Register extends Component {
 
         })
         .catch((error) => {
-            console.log(error);
+            
         });
     }
 

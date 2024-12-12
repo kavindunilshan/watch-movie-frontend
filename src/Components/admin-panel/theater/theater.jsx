@@ -13,7 +13,7 @@ function AdminTheater() {
 
     const userId = state?.sub.replace(/-/g, "");
 
-    console.log("Here userId", userId);
+    
 
     // State for theater and location data, errors, and edit mode
     const [theaterData, setTheaterData] = useState({
@@ -65,7 +65,7 @@ function AdminTheater() {
                     setTheaterData(theaterData);
                     setLocationData(locationData);
                 }
-                console.log("Theater data", data);
+                
             }).catch((error) => {
                 console.error("Failed to fetch theater data", error);
             });
@@ -97,7 +97,7 @@ function AdminTheater() {
     // Submit updated data to backend
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("Theater data", theaterData);
+        
 
         const location = {
             tid: userId,
@@ -111,7 +111,7 @@ function AdminTheater() {
             });
             setIsEditMode(false);
 
-            console.log("Here response", response.data);
+            
         } catch (error) {
             console.error("Failed to update theater data", error);
         }

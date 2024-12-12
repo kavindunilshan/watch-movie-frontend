@@ -1,13 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import Logo from '../Images/logo.png';
 import '../Styles/navbar.css';
 import {useAuthContext} from "@asgardeo/auth-react";
 
 function NavBar() {
-    const { state, signIn, signOut } = useAuthContext();
+    const { state, signIn, signOut, getBasicUserInfo } = useAuthContext();
 
-    console.log(state);
+    useEffect(() => {
+        async function fetchData() {
+            const userInfo = await getBasicUserInfo();
+            
+        }
+
+        if (state?.isAuthenticated) {
+            fetchData();
+        }
+    }, [state]);
+
+    const handleSignIn = async () => {
+        signIn().then(
+            (response) => {
+                
+            }
+        );
+    }
+
 
   return (
     <React.Fragment>
@@ -41,7 +59,7 @@ function NavBar() {
       {!state?.isAuthenticated &&
         <section className="nav-btns">
             <button className="nav-btn">
-                <div className="btn-link" aria-current="page" onClick={() => signIn()}>
+                <div className="btn-link" aria-current="page" onClick={() => handleSignIn()}>
                     Login
                 </div>
             </button>
