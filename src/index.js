@@ -17,8 +17,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             config={ {
                 signInRedirectURL: "http://localhost:3000",
                 signOutRedirectURL: "http://localhost:3000",
-                clientID: clientID,
-                baseUrl: baseUrl,
+                clientID: "7sZC7Fcd92FffmUW5lA6cXwwTA4a",
+                baseUrl: "https://api.asgardeo.io/t/spendwise",
                 scope: [ "openid", "profile", "email", "read_movies"]
             } }
         >

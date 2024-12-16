@@ -58,8 +58,10 @@ class TheaterMovie extends Component {
         
 
         let seatData = await fetchData(`/seatData/${tid}/${mid}/${showTime}/${date}`);
+
+        console.log("Seat Data", seatData);
         
-        if (!seatData?.id.tid) {
+        if (!seatData?.id) {
             const hallData = await fetchData(`/halls/${tid}/${show.hid}`);
             
             const numSeats = hallData.seats;

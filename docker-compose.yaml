@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: watchmovie-fo:latest
+    container_name: watchmovie-fo
+    ports:
+      - "3000:80"
+    restart: unless-stopped
