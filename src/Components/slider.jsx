@@ -17,7 +17,7 @@ function Slider() {
     const fetchImages = async () => {
       try {
         const data = await fetchData("/movies");
-
+        console.log("Here data", data);
         let pictures = data.map( (image) => {return image.portrait;});
 
         pictures = [...pictures, ...pictures]
