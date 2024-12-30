@@ -5,13 +5,20 @@ import '../Styles/navbar.css';
 import {useAuthContext} from "@asgardeo/auth-react";
 
 function NavBar() {
-    const { state, signIn, signOut, getBasicUserInfo } = useAuthContext();
+    const { state, signIn, signOut, getBasicUserInfo, getAccessToken } = useAuthContext();
 
     useEffect(() => {
         async function fetchData() {
             const userInfo = await getBasicUserInfo();
+            const accessToken = await getAccessToken();
+
+            console.log("User Info here1", userInfo);
+            console.log("Access Token here2", accessToken);
+            console.log("User Info here3", state);
             
         }
+
+        console.log("User Info here4", state);
 
         if (state?.isAuthenticated) {
             fetchData();
@@ -19,11 +26,7 @@ function NavBar() {
     }, [state]);
 
     const handleSignIn = async () => {
-        signIn().then(
-            (response) => {
-                
-            }
-        );
+        signIn();
     }
 
 

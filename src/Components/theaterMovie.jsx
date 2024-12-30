@@ -19,6 +19,12 @@ class TheaterMovie extends Component {
     
 
     async componentDidMount() {
+
+        if (!this.props.state.isAuthenticated) {
+            this.props.signIn();
+        }
+
+
         const {searchParams} = this.props;
         const tid = searchParams.get("tid");
         const mid = searchParams.get("mid");
@@ -123,7 +129,7 @@ class TheaterMovie extends Component {
         const {theater, movie, shows, tickets, selectionModel, showTime, selectedShow, seatData} = this.state;
         return (
             <React.Fragment>
-            {theater && movie && shows &&
+            {this.props.state.isAuthenticated && theater && movie && shows &&
                 <div>
                     <div className={selectionModel ? "tmb tmb-active" : "tmb"} onClick={this.handleDone}>
                         <div className='tmb-heading'>
