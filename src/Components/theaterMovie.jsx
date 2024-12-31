@@ -1,9 +1,8 @@
 import React, {Component} from 'react'
 import "../Styles/theaterMovie.css"
-import Dropdown from './dropdown';
 import NumberInput from './quantity';
 import SeatSelection from './seatSelection';
-import {fetchData, updateData} from '../Services/httpService';
+import {createData, fetchData, updateData} from '../Services/httpService';
 import {withRouter} from './cs';
 import DateField from './dateField';
 import BasicSelect from './materialDropDown';
@@ -21,7 +20,8 @@ class TheaterMovie extends Component {
     async componentDidMount() {
 
         if (!this.props.state.isAuthenticated) {
-            this.props.signIn();
+            this.props.signIn().then(() => {
+            });
         }
 
 
@@ -61,12 +61,9 @@ class TheaterMovie extends Component {
         const {showTime, date} = this.state;
 
         const show = this.state.shows.find(show => show.id.timeSlot == showTime);
-        
 
         let seatData = await fetchData(`/seatData/${tid}/${mid}/${showTime}/${date}`);
 
-        console.log("Seat Data", seatData);
-        
         if (!seatData?.id) {
             const hallData = await fetchData(`/halls/${tid}/${show.hid}`);
             
@@ -111,18 +108,39 @@ class TheaterMovie extends Component {
 
     handleSeatBooking = async (seatsList) => {
         const navigate = this.props.navigate;
+
+        const bookedSeats = seatsList
+            .map((seat, index) => (seat === "2" ? index + 1 : -1))
+            .filter(index => index !== -1);
+
         const seats = seatsList.join("").replace(/2/g, "1");
         const seatData = {...this.state.seatData}
         seatData["seats"] = seats;
 
-        
-        try{
-            const data = await updateData("/seatData", seatData);
+
+        updateData("/seatData", seatData).then(() => {
             toast("Payment Successful!");
-        } catch {
+
+            const email = {
+                uid: this.props.state.sub.replaceAll("-", ""),
+                email: this.props.state.email,
+                subject: "Ticket Booking",
+                content: `Your tickets have been successfully booked for
+                 ${this.state.movie.name} at ${this.state.theater.name}
+                  on ${this.state.date} at ${this.state.showTime}
+                  booked seats are ${bookedSeats}
+                  `,
+                secure: true,
+            }
+
+            createData("/emails", email).then(() => {
+                toast("Ticket sent to your email!");
+            });
+        }).catch(() => {
             toast.error("Payment Unsuccessful!");
-        }
-        navigate("/");
+        }).finally(() => {
+            navigate("/");
+        });
     }
 
     render() {

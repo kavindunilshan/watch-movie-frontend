@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 import Logo from '../Images/logo.png';
 import '../Styles/navbar.css';
 import {useAuthContext} from "@asgardeo/auth-react";
+import {fetchData} from "../Services/admin-services";
 
 function NavBar() {
     const { state, signIn, signOut, getBasicUserInfo, getAccessToken } = useAuthContext();
@@ -11,22 +12,16 @@ function NavBar() {
         async function fetchData() {
             const userInfo = await getBasicUserInfo();
             const accessToken = await getAccessToken();
-
-            console.log("User Info here1", userInfo);
-            console.log("Access Token here2", accessToken);
-            console.log("User Info here3", state);
-            
         }
-
-        console.log("User Info here4", state);
-
         if (state?.isAuthenticated) {
             fetchData();
         }
     }, [state]);
 
     const handleSignIn = async () => {
-        signIn();
+        signIn().then(() => {
+            fetchData("/users");
+        });
     }
 
 
