@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {toast} from 'react-toastify';
 
-const apiEndPoint = 'http://localhost:8080/api';
+const apiEndPoint = 'http://51.20.35.253:8080/api';
 
 export const fetchData = async (path) => {
     try {
