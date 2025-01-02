@@ -104,7 +104,7 @@ function AdminTheater() {
             ...locationData
         }
         try {
-            const response = await axios.put('http://localhost:8080/api/theaters', {
+            const response = await axios.put('http://51.20.35.253:8080/api/theaters', {
                 ...theaterData,
                 tid: userId,
                 location: location,

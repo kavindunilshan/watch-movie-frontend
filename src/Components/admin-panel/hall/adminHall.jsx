@@ -129,7 +129,7 @@ export default function AdminHall() {
         }
 
         try {
-            const response = await axios.put('http://localhost:8080/api/halls', {
+            const response = await axios.put('http://51.20.35.253:8080/api/halls', {
                 ...hallData,
                 id: {tid: userId},
             });

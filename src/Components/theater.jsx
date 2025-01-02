@@ -60,10 +60,20 @@ class Theater extends Component {
     }
 
     handleClick = (mid) => {
-        const navigate = this.props.navigate;
-        const {searchParams} = this.props;
-        const tid = searchParams.get("tid");
-        navigate(`/theater-movie/?tid=${tid}&mid=${mid}`);
+        if (!this.props.state.isAuthenticated) {
+            const signIn = this.props.signIn;
+            signIn({ popup: true } ).then(() => {
+                const navigate = this.props.navigate;
+                const {searchParams} = this.props;
+                const tid = searchParams.get("tid");
+                navigate(`/theater-movie/?tid=${tid}&mid=${mid}`);
+            });
+        } else {
+            const navigate = this.props.navigate;
+            const {searchParams} = this.props;
+            const tid = searchParams.get("tid");
+            navigate(`/theater-movie/?tid=${tid}&mid=${mid}`);
+        }
     }
 
     render() { 

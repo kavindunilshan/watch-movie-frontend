@@ -3,8 +3,19 @@ import "../Styles/home.css"
 import Slider from './slider';
 import SloganText from './Slogans';
 import {withRouter} from './cs';
+import {createData} from "../Services/httpService";
 
 class Home extends Component {
+
+    componentDidMount() {
+        const {state} = this.props;
+        if (state.isAuthenticated) {
+            const {email, sub} = state;
+            const id = sub.replace(/-/g, "");
+            createData("/users", {id: id, email: email});
+        }
+    }
+
     handleClick = () => {
         const navigate = this.props.navigate;
         navigate("/movies");
